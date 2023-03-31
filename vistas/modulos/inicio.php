@@ -36,7 +36,7 @@
               <div class="card-body text-center">
                 <div>
                   <h2>BoatControl</h2>
-                  <p>Sistema elaborado para el control del mantenimiento de embarcaciones</p>
+                  <p>Sistema elaborado para el control del mantenimiento de embarcaciones</p>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
                   <button class="btn btn-primary active mt-3" type="button">Info</button>
                 </div>
               </div>
