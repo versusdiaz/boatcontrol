@@ -1,12 +1,10 @@
 <?php
-
-
 class EnlacesModels{
 
     public function __construct() { }
 
     public static function enlacesModels($enlaces){
-        if($enlaces == "inicio" ||
+        if($enlaces == "centro" ||
            $enlaces == "escritorio" ){
             /* MODULO A CARGAR SERA */
             $module = "vistas/modulos/".$enlaces.".php";
