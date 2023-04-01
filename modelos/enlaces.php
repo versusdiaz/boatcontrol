@@ -12,7 +12,9 @@ class EnlacesModels{
         } else if ($enlaces == "index") {
             $module = "vistas/modulos/escritorio.php";
         } else if ($enlaces == "admin") {
-            $module = "admin/";
+            // $module = "admin/";
+            // Este sistema no maneja modulo admin
+            $module = "vistas/modulos/inicio.php";
         } else {
           $module = "vistas/modulos/inicio.php";
         }

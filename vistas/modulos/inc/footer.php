@@ -1,11 +1,11 @@
 <footer class="app-footer">
       <div>
         <a>ATM</a>
-        <span>&copy; 2019</span>
+        <span>&copy; 2023</span>
       </div>
       <div class="ml-auto">
         <span>Powered by</span>
-        <a>Proteo</a>
+        <a>GRUPO DE TRANSPORTE ATM</a>
       </div>
 </footer>
 <script src="vistas/plugins/jquery/jquery.min.js"></script>

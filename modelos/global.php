@@ -10,4 +10,4 @@ define("DB_PASSWORD","");
 /*Codificacion*/
 define("DB_ENCODE","utf8");
 /*Nombre proyecto*/
-define("PRO_NOMBRE","proteo");
+define("PRO_NOMBRE","boatcontrol");
