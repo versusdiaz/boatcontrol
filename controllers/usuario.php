@@ -138,10 +138,10 @@ switch ($_GET["op"]){
 			//Declaramos las variables de sesion
 			$_SESSION['idusuario']=$fetch->idusuario;
 			$_SESSION['nombre']=$fetch->nombre;
-			$_SESSION['imagen']=$fetch->imagen;
+			//$_SESSION['imagen']=$fetch->imagen;
             $_SESSION['login']=$fetch->login;
             $_SESSION['validarPTR']=1;
-
+			
 	        //Obtenemos los permisos del usuario
 	    	$marcados = $usuario->listarmarcados($fetch->idusuario);
 

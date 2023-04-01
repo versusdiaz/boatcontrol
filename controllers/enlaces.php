@@ -4,7 +4,7 @@ class Enlaces{
         if(isset($_GET['action'])){
             $enlaces = $_GET['action'];
         } else {
-            $enlaces = 'index';
+            $enlaces = "index";
         }
         $respuesta = EnlacesModels::enlacesModels($enlaces);
         include ($respuesta);

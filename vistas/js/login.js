@@ -10,6 +10,7 @@ $("#frmAcceso").on('submit',function(e)
         $.post("controllers/usuario.php?op=verificar",{"logina":login,"clavea":clave},function(data){
         if(data!="null"){
             $(location).attr("href","escritorio");
+            alert(data);
         }else{
              swal('Error!','Usuario y/o clave incorrectos','error');
         }
