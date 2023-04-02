@@ -28,93 +28,27 @@
                 <i class="nav-icon icon-pencil"></i> Ingresar</a>
               <ul class="nav-dropdown-items">
                 <li class="nav-item">
-                  <a class="nav-link" href="clientes">
-                    <i class="nav-icon icon-people"></i> Clientes</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="proveedores">
-                    <i class="nav-icon icon-people"></i> Proveedores</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="items">
-                    <i class="nav-icon fa fa-shopping-bag"></i> Items</a>
+                  <a class="nav-link" href="actividades">
+                    <i class="nav-icon icon-docs"></i> Actividades</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="centro">
-                    <i class="nav-icon icon-home"></i> Centro</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="formatos">
-                    <i class="nav-icon fa fa-book"></i> Formatos</a>
+                    <i class="nav-icon icon-support"></i> Embarcaciones</a>
                 </li>
               </ul>
             </li>
             <li class="nav-item nav-dropdown">
               <a class="nav-link nav-dropdown-toggle" href="#">
-                <i class="nav-icon fa fa-cubes"></i> Requisiciones </a>
+                <i class="nav-icon icon-book-open"></i> Ordenes </a>
               <ul class="nav-dropdown-items">
                 <li class="nav-item">
-                  <a class="nav-link" href="request_m">
-                    <i class="nav-icon icon-control-play"></i> Crear Requisicion</a>
+                  <a class="nav-link" href="ods_mtto_act">
+                    <i class="nav-icon icon-control-play"></i> Crear Ordenes</a>
                 </li>
-                <li class="nav-item nav-dropdown">
-                    <a class="nav-link nav-dropdown-toggle" href="#">
-                        <i class="nav-icon icon-control-forward"></i> Req. en Archivo</a>
-                    <ul class="nav-dropdown-items">
-                        <li class="nav-item">
-                            <a class="nav-link" href="request_mtto">
-                                <i class="nav-icon fa fa-wrench"></i> Req. MTTO
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="request_op">
-                                <i class="nav-icon fa fa-ship"></i> Req. OP
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="request_al">
-                                <i class="nav-icon fa fa-home"></i> Req. AL
-                            </a>
-                        </li>
-                    </ul>
+                <li class="nav-item">
+                  <a class="nav-link" href="ods_mtto">
+                    <i class="nav-icon icon-control-forward"></i> Ordenes en Archivo</a>
                 </li>     
-              </ul>
-            </li>
-            <li class="nav-item nav-dropdown">
-              <a class="nav-link nav-dropdown-toggle" href="#">
-                <i class="nav-icon icon-calculator"></i> Presupuestos</a>
-              <ul class="nav-dropdown-items">
-                <li class="nav-item">
-                  <a class="nav-link" href="pcs">
-                    <i class="nav-icon icon-note"></i> Asignar Presupuesto</a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item nav-dropdown">
-              <a class="nav-link nav-dropdown-toggle" href="#">
-                <i class="nav-icon icon-wrench"></i> Ordenes Compra</a>
-              <ul class="nav-dropdown-items">
-                <li class="nav-item nav-dropdown">
-                    <a class="nav-link nav-dropdown-toggle" href="#">
-                        <i class="nav-icon icon-control-forward"></i> Ord. en Archivo </a>
-                    <ul class="nav-dropdown-items">
-                        <li class="nav-item">
-                            <a class="nav-link" href="ordenesM">
-                                <i class="nav-icon fa fa-wrench"></i> Ord. MTTO
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="ordenesO">
-                                <i class="nav-icon fa fa-ship"></i> Ord. OP
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="ordenesA">
-                                <i class="nav-icon fa fa-home"></i> Ord. AL
-                            </a>
-                        </li>
-                    </ul>
-                </li>
               </ul>
             </li>
           </ul>
