@@ -28,12 +28,6 @@ function init(){
                 number: true,
                 min: 0
             },
-            materiales:{
-                nombre: true
-            },
-            repuestos:{
-                nombre: true
-            },
             tolerancia:{
                 number: true,
                 min: 0
@@ -165,7 +159,7 @@ function mostrar(idact){
         $("#unidad").selectpicker('refresh');
         $("#severidad").val(data.severidad);
         $("#severidad").selectpicker('refresh');
-        $("#tolerancia").val(data.detalle);
+        $("#tolerancia").val(data.tolerancia);
      });
     }
 

@@ -90,8 +90,8 @@
                         <div class="col-sm-12">
                             <select class="form-control selectpicker" data-live-search="true" name="severidad" id="severidad">
                             <option value="">SELECCIONE</option>
-                            <option value="NORMAL">NORMAL</option>
-                            <option value="URGENTE">URGENTE</option>
+                            <option value="DESPRECIABLE">DESPRECIABLE</option>
+                            <option value="RELEVANTE">RELEVANTE</option>
                             <option value="CRITICA">CRITICA</option>
                             </select>
                         </div>
