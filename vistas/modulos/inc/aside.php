@@ -42,7 +42,7 @@
                 <i class="nav-icon icon-book-open"></i> Ordenes </a>
               <ul class="nav-dropdown-items">
                 <li class="nav-item">
-                  <a class="nav-link" href="ods_mtto_act">
+                  <a class="nav-link" href="ods_mtto">
                     <i class="nav-icon icon-control-play"></i> Crear Ordenes</a>
                 </li>
                 <li class="nav-item">

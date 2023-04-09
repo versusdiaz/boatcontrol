@@ -13,7 +13,7 @@
         <li class="breadcrumb-item">
             <a href="#">Admin</a>
         </li>
-        <li class="breadcrumb-item active">Dashboard</li>
+        <li class="breadcrumb-item active">Embarcaciones</li>
     </ol>
     <div class="container-fluid">
         <div class="animated fadeIn">
