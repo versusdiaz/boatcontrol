@@ -45,12 +45,17 @@ $idrequest_item = isset($_POST['idrequest_item'])? limpiarCadena($_POST['idreque
 switch ($_GET["op"]){
     case 'guardaryeditar':
 		if (empty($idods_mtto)){
-            $rspta=$ods_mtto->insertar($idcentro,$codigo,$com_general,$com_estado,$com_falla,$horas,$tipo,$sistema,$tiempo_ino,$tiempo_mtto,$costo,$afectaservicio,$fecha);
-            echo $rspta ? "Orden registrada con exito":"No se pudieron registrar todos los datos de la Orden";
+            $validacion = $ods_mtto->verificarCod($codigo);
+            if($validacion == null){
+                $rspta=$ods_mtto->insertar($idcentro,$codigo,$com_general,$com_estado,$com_falla,$horas,$tipo,$sistema,$tiempo_ino,$tiempo_mtto,$costo,$afectaservicio,$fecha);
+                echo $rspta ? "Orden registrada con exito":"No se pudieron registrar todos los datos de la Orden";
+            } else {
+                echo "Ya existe una Orden registrada con el mismo numero";
+            }
 		}
 		else {
-            $rspta=$ods_mtto->editar($idods_mtto,$idusuario,$iddepartamento,$idcentro,$comentario,$responsable,$supervisor,$prioridad,$calidad,$mantenimiento,$fecha,$servicio,$stock);
-			echo $rspta ? "Requisicion actualizada con exito":"No se pudieron actualizar los datos de la requisicion";
+            $rspta=$ods_mtto->editar($idods_mtto,$idcentro,$codigo,$com_general,$com_estado,$com_falla,$horas,$tipo,$sistema,$tiempo_ino,$tiempo_mtto,$costo,$afectaservicio,$fecha);
+			echo $rspta ? "Orden actualizada con exito":"No se pudieron actualizar los datos de la Orden";
 		}
     break;
 
@@ -70,13 +75,13 @@ break;
         $data = Array();
         while($reg = $rspta->fetch_object()){
            $data[]=array(
-               "0"=>'<button class="btn btn-warning" onclick="mostrar('.$reg->idrequest_temp.')"><i class="nav-icon icon-pencil" style="color:white" ></i></button> <button class="btn btn-danger" onclick="eliminar('.$reg->idrequest_temp.')"><i class="fa fa-trash"></i></button>'.
- 					' <button class="btn btn-primary" onclick="mostrarP('.$reg->idrequest_temp.')"><i class="fa fa-cart-arrow-down"></i></button> <button class="btn btn-success" onclick="confirmarP('.$reg->idrequest_temp.')"><i class="fa fa fa-check"></i></button>',
-               "1"=>$reg->depto,
-               "2"=>$reg->buque,
-               "3"=>$reg->usuario,
+               "0"=>'<button class="btn btn-warning" onclick="mostrar('.$reg->idods_mtto.')"><i class="nav-icon icon-pencil" style="color:white" ></i></button> <button class="btn btn-danger" onclick="eliminar('.$reg->idods_mtto.')"><i class="fa fa-trash"></i></button>'.
+ 					' <button class="btn btn-primary" onclick="mostrarP('.$reg->idods_mtto.')"><i class="fa fa-fire"></i></button> <button class="btn btn-success" onclick="confirmarP('.$reg->idods_mtto.')"><i class="fa fa fa-check"></i></button>',
+               "1"=>$reg->codigo,
+               "2"=>$reg->nombre,
+               "3"=>$reg->com_falla,
                "4"=>$reg->fecha,
-               "5"=>'<span class="badge badge-dark">Numero: '.$reg->idrequest_temp.'</span>'
+               "5"=>'<span class="badge badge-dark">Numero: '.$reg->idods_mtto.'</span>'
            );
         }
         /*CARGAMOS LA DATA EN LA VARIABLE USADA PARA EL DATATABLE*/
@@ -114,7 +119,7 @@ break;
 
     case 'eliminar':
     $rspta = $ods_mtto->eliminar($idods_mtto);
-    echo $rspta ? "Requisicion eliminada": "La Requisicion no se puede eliminar, verifique que no este vinculada";
+    echo $rspta ? "Orden eliminada": "La Orden no se puede eliminar, verifique que no tenga actividades asociadas";
     break;
 
     case 'eliminarItem':

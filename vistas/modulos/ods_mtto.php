@@ -18,7 +18,7 @@
     <div class="container-fluid">
     <div class="animated fadeIn">
         <div class="row">
-            <div class="col-sm-6 col-xl-6">
+            <div class="col-sm-12 col-xl-12">
                 <div class="card">
                     <div class="card-header">
                         <i class="fa fa-globe"></i> Orden de Mantenimiento
@@ -35,6 +35,7 @@
                                     <th>Embarcacion</th>
                                     <th>Situacion E.</th>
                                     <th>Fecha</th>
+                                    <th>Cod. Interno</th>
                                 </thead>
                                 <tbody>
                                 </tbody>
@@ -44,6 +45,7 @@
                                     <th>Embarcacion</th>
                                     <th>Situacion E.</th>
                                     <th>Fecha</th>
+                                    <th>Cod. Interno</th>
                                 </tfoot>
                             </table>
                         </div>
@@ -55,6 +57,7 @@
                                     <label class="col-sm-12 control-label">Embarcacion *:</label>
                                     <div class="col-sm-12">
                                         <select class="form-control selectpicker" data-live-search="true" name="centro" id="centro">
+                                        <option value="">SELECCIONE</option>
                                         </select>
                                     </div>
                                 </div>
@@ -176,7 +179,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-xl-6">
+            
+            <div class="col-lg-6 col-sm-6 col-xl-6">
+                
             <div class="card">
                 <div class="card-header">
                     <i class="fa fa-fire"></i> Cargar Actividades
@@ -213,7 +218,6 @@
                                     <input type="number" class="form-control" name="precio" id="precio" step='0.01' >
                                 </div>
                             </div>
-
                             <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <button class="btn btn-primary" type="submit" id="btnGuardarP">
                                     <i class="fa fa-download"></i> Cargar</button>
@@ -224,13 +228,12 @@
                     </form>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12 col-xl-12">
-        <div class="card">
+            </div>
+
+            <div class="col-lg-6 col-sm-6 col-xl-6">
+            <div class="card">
                     <div class="card-header">
-                        <i class="fa fa-list-alt"></i> Request List
+                        <i class="fa fa-list-alt"></i> Actividades ejecutadas
                     </div>
                     <div class="card-body">
                         <!-- AQUI VA TABLA -->
@@ -239,24 +242,23 @@
                                 <thead>
                                     <th>Opciones</th>
                                     <th>Nombre</th>
-                                    <th>Cantidad</th>
-                                    <th>Precio</th>
                                 </thead>
                                 <tbody>
                                 </tbody>
                                 <tfoot>
                                     <th>Opciones</th>
                                     <th>Nombre</th>
-                                    <th>Cantidad</th>
-                                    <th>Precio</th>
                                 </tfoot>
                             </table>
                         </div>
                     </div>
-                </div> 
+        </div> 
                 <!-- FIN DEL TABLE PURCHASE -->
         </div>
-    </div>
+ </div>
+<!-- FIN DEL TABLE PURCHASE -->
+        </div>
+    </div> <!-- FIN DEL ROW -->
 </div>
         <!-- FIN DEL JUMBO -->
     </div>

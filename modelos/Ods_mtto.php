@@ -13,15 +13,20 @@ class Ods_mtto{
         return $sw;
     }
     
-    public static function editar($idrequest_temp,$idusuario,$iddepartamento,$idcentro,$comentario,$responsable,$supervisor,$prioridad,$calidad,$mantenimiento,$fecha,$servicio,$stock){
-        $sql = "UPDATE request_temp SET idusuario='$idusuario',iddepartamento='$iddepartamento',idcentro='$idcentro',comentario='$comentario',responsable='$responsable',supervisor='$supervisor',prioridad='$prioridad',calidad='$calidad',mantenimiento='$mantenimiento',fecha='$fecha',servicio='$servicio',stock='$stock' WHERE idrequest_temp = '$idrequest_temp'";
+    public static function editar($idods_mtto,$idcentro,$codigo,$com_general,$com_estado,$com_falla,$horas,$tipo,$sistema,$tiempo_ino,$tiempo_mtto,$costo,$afectaservicio,$fecha){
+        $sql = "UPDATE ods_mtto SET idcentro='$idcentro',codigo='$codigo',com_general='$com_general',com_estado='$com_estado',com_falla='$com_falla',horas='$horas',tipo='$tipo',sistema='$sistema',tiempo_ino='$tiempo_ino',tiempo_mtto='$tiempo_mtto',costo='$costo',afectaservicio='$afectaservicio',fecha='$fecha' WHERE idods_mtto = '$idods_mtto'";
         $sw = true;
         Consulta($sql) or $sw = false;
         return $sw;
     }
     
-    public static function desactivar($idrequest_temp){
-        $sql = "UPDATE request_temp SET condicion='0' WHERE idrequest_temp='$idrequest_temp'";
+    public static function verificarCod($codigo){
+        $sql = "SELECT codigo FROM ods_mtto WHERE codigo='$codigo'";
+        return Consulta_num($sql); 
+    }
+
+    public static function eliminar($idods_mtto){
+        $sql = "DELETE FROM ods_mtto WHERE idods_mtto='$idods_mtto'";
         return Consulta($sql);
     }
     
@@ -30,8 +35,8 @@ class Ods_mtto{
         return Consulta($sql);
     }
     
-    public static function mostrar($idrequest_temp){
-        $sql = "SELECT * FROM request_temp WHERE idrequest_temp='$idrequest_temp'";
+    public static function mostrar($idods_mtto){
+        $sql = "SELECT * FROM ods_mtto WHERE idods_mtto='$idods_mtto'";
         return ConsultaFila($sql);
     }
 
@@ -41,7 +46,7 @@ class Ods_mtto{
     }
     
     public static function listar(){
-        $sql = "SELECT T1.idrequest_temp, T2.nombre AS usuario, T3.nombre AS depto, T4.nombre AS buque, T1.fecha, T1.condicion FROM request_temp as T1 LEFT JOIN usuarios as T2 ON T1.idusuario = T2.idusuario LEFT JOIN departamento as T3 ON T1.iddepartamento = T3.iddepartamento LEFT JOIN centro AS T4 ON T1.idcentro = T4.idcentro WHERE T1.condicion=1";
+        $sql = "SELECT T1.idods_mtto, T1.codigo, T2.nombre, T1.com_falla, T1.fecha FROM ods_mtto AS T1 LEFT JOIN centro AS T2 ON T1.idcentro = T2.idcentro WHERE T1.condicion = 1"; 
         return Consulta($sql);
     }
 
@@ -52,11 +57,6 @@ class Ods_mtto{
     
      public static function listarc(){
         $sql = "SELECT idrequest_temp, nombre FROM request_temp WHERE condicion=1";
-        return Consulta($sql);
-    }
-
-    public static function eliminar($idrequest_temp){
-        $sql = "DELETE FROM request_temp WHERE idrequest_temp='$idrequest_temp'";
         return Consulta($sql);
     }
 

@@ -120,6 +120,8 @@ function limpiar(){
     $("#costo").val("");
     $("#fecha").val("");
 
+    $("#centro").val("");
+    $("#centro").selectpicker("refresh");
 
     $("#tipo").val("");
     $("#tipo").selectpicker("refresh");
@@ -244,24 +246,27 @@ function mostrar(idods_mtto){
          data = JSON.parse(data);
          mostrarform(true);
         $("#idods_mtto").val(data.idods_mtto);
-        $("#departamento").val(data.iddepartamento);
-        $("#departamento").selectpicker('refresh');
-        $("#centro").val(data.idcentro);
-        $("#centro").selectpicker('refresh');
-        $("#responsable").val(data.responsable);
-        $("#supervisor").val(data.supervisor);
-        $("#comentario").val(data.comentario);
+        $("#codigo").val(data.codigo);
+        $("#com_general").val(data.com_general);
+        $("#com_estado").val(data.com_estado);
+        $("#com_falla").val(data.com_falla);
+        $("#horas").val(data.horas);
+        $("#tiempo_ino").val(data.tiempo_ino);
+        $("#tiempo_mtto").val(data.tiempo_mtto);
+        $("#costo").val(data.costo);
         $("#fecha").val(data.fecha);
-        $("#mantenimiento").val(data.mantenimiento);
-        $("#mantenimiento").selectpicker('refresh');
-        $("#calidad").val(data.calidad);
-        $("#calidad").selectpicker('refresh');
-        $("#prioridad").val(data.prioridad);
-        $("#prioridad").selectpicker('refresh');
-        $("#servicio").val(data.servicio);
-        $("#servicio").selectpicker('refresh');
-        $("#stock").val(data.stock);
-        $("#stock").selectpicker('refresh');
+
+        $("#centro").val(data.idcentro);
+        $("#centro").selectpicker("refresh");
+
+
+        $("#tipo").val(data.tipo);
+        $("#tipo").selectpicker('refresh');
+        $("#sistema").val(data.sistema);
+        $("#sistema").selectpicker("refresh");
+        $("#afectaservicio").val(data.afectaservicio);
+        $("#afectaservicio").selectpicker("refresh");
+
      });
     }
 
@@ -290,17 +295,17 @@ function mostrarP(idrequest_temp){
     
     }
 
- function eliminar(idrequest_temp){
+ function eliminar(idods_mtto){
     swal({
         title: "Esta seguro..?"
-        , text: "Al eliminar esta requisicion, no podra utilizarse en el sistema"
+        , text: "Al eliminar esta Orden, no podra utilizarse en el sistema"
         , type: "warning"
         , showCancelButton: true
         , confirmButtonColor: "#da4f49"
         , confirmButtonText: "Si, deseo eliminarla!"
         , closeOnConfirm: false
         }, function () {
-            $.post('controllers/request_m.php?op=eliminar',{idrequest_temp:idrequest_temp},function(respuesta){
+            $.post('controllers/ods_mtto.php?op=eliminar',{idods_mtto:idods_mtto},function(respuesta){
             swal(respuesta, "Presione OK para continuar");  
             tabla.ajax.reload();
             });
