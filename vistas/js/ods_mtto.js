@@ -92,8 +92,8 @@ function init(){
     });
 
     $.post("controllers/actividades.php?op=listarc",function(respuesta){
-    $("#nombreItem").html(respuesta);
-    $("#nombreItem").selectpicker('refresh');
+    $("#nombreAct").html(respuesta);
+    $("#nombreAct").selectpicker('refresh');
     });    
 
     $("#formulario").on("submit",function(e){
@@ -134,10 +134,8 @@ function limpiar(){
 }
 
 function limpiarP(){
-    $("#nombre").val("");
-    $("#cantidad").val("");
-    $("#detalle").val("");
-    $("#precio").val("");
+    // $("#nombreAct").val("");
+    // $("#nombreAct").selectpicker("refresh");
 
 }
 
@@ -227,7 +225,7 @@ function guardaryeditarP(e){
     e.preventDefault();
      var formData = new FormData($("#formularioP")[0]);
      $.ajax({
-        url:"controllers/request_m.php?op=guardaryeditarP",
+        url:"controllers/ods_mtto.php?op=guardaryeditarP",
         type:"POST",
         data: formData,
         contentType: false,
@@ -239,6 +237,7 @@ function guardaryeditarP(e){
         }
      });
 }
+
 
 function mostrar(idods_mtto){
      $.post("controllers/ods_mtto.php?op=mostrar",{idods_mtto:idods_mtto},function(data,status){
@@ -270,8 +269,9 @@ function mostrar(idods_mtto){
      });
     }
 
-function mostrarP(idrequest_temp){
-    $("#idrequest_tempP").val(idrequest_temp); // ASIGNO ID AL PURCHASE
+function mostrarP(idrequest_temp,horas){
+    $("#idrequest_tempP").val(idrequest_temp);
+    $("#horastemp").val(horas); // ASIGNO ID AL PURCHASE
     $("#btnInfo").text('Nro: '+idrequest_temp);
     mostrarformP(true);
     tabla2=$('#tbllistadoPurchase').dataTable(
@@ -281,7 +281,7 @@ function mostrarP(idrequest_temp){
             dom: 'Bfrtip',//Definimos los elementos del control de tabla
             "ajax":
                     {
-                        url: 'controllers/request_m.php?op=listarP&idrequest='+idrequest_temp,
+                        url: 'controllers/ods_mtto.php?op=listarP&idrequest='+idrequest_temp,
                         type : "get",
                         dataType : "json",
                         error: function(e){
@@ -315,14 +315,14 @@ function mostrarP(idrequest_temp){
  function eliminarItem(idrequest_item){
     swal({
         title: "Esta seguro..?"
-        , text: "Al eliminar este item, no podra utilizarse en el sistema"
+        , text: "Al eliminar esta actividad, no podra utilizarse en el sistema"
         , type: "warning"
         , showCancelButton: true
         , confirmButtonColor: "#da4f49"
         , confirmButtonText: "Si, deseo eliminarlo!"
         , closeOnConfirm: false
         }, function () {
-            $.post('controllers/request_m.php?op=eliminarItem',{idrequest_item:idrequest_item},function(e){
+            $.post('controllers/ods_mtto.php?op=eliminarItem',{idrequest_item:idrequest_item},function(e){
             swal("Eliminada!", e , "success");  
             tabla2.ajax.reload();
             });
@@ -363,17 +363,17 @@ function mostrarP(idrequest_temp){
         });
  }
 
- function confirmarP(idrequest_temp){
+ function confirmarP(idods_mtto){
     swal({
         title: "Esta seguro..?"
-        , text: "Al procesar esta requisicion, sera enumerada"
+        , text: "Al procesar esta orden, sera almacenada"
         , type: "warning"
         , showCancelButton: true
         , confirmButtonColor: "#da4f49"
         , confirmButtonText: "Si, procesarla !"
         , closeOnConfirm: false
         }, function () {
-            $.post('controllers/request_m.php?op=confirmarP',{idrequest_temp:idrequest_temp},function(e){
+            $.post('controllers/ods_mtto.php?op=confirmarP',{idods_mtto:idods_mtto},function(e){
             swal(e, "Presione OK para continuar");
             tabla.ajax.reload();
             mostrarformP(false);            

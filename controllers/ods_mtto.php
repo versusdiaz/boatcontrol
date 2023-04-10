@@ -1,8 +1,11 @@
 <?php
 session_start();
 require_once("../modelos/Ods_mtto.php");
+require_once("../modelos/Actividades.php");
 
 $ods_mtto = new Ods_mtto();
+
+$actividades = new Actividades();
 
 /*INICIALIZO VARIABLES*/
 
@@ -34,7 +37,11 @@ $costo=isset($_POST['costo'])? limpiarCadena($_POST['costo']):"";
 
 $afectaservicio=isset($_POST['afectaservicio'])? limpiarCadena($_POST['afectaservicio']):"";
 
+$horastemp = isset($_POST['horastemp'])? limpiarCadena($_POST['horastemp']):"";
 
+$nombreAct=isset($_POST['nombreAct'])? limpiarCadena($_POST['nombreAct']):"";
+
+$idrequest_tempP=isset($_POST['idrequest_tempP'])? limpiarCadena($_POST['idrequest_tempP']):"";
 
 $idrequest = isset($_GET['idrequest'])? limpiarCadena($_GET['idrequest']):"";
 
@@ -60,14 +67,13 @@ switch ($_GET["op"]){
     break;
 
     case 'guardaryeditarP':
-        $validarItem = $ods_mtto->propiedadItem($nombreItem);
-        $validarRequest = $ods_mtto->propiedadRequest($idrequest_tempP);
-        if( $validarItem == $validarRequest ){
-            $rspta =$ods_mtto->insertarItem($idrequest_tempP,$detalle,$nombreItem,$cantidad,$precio);
-            echo $rspta ? "Item cargado con exito":"No se pudieron registrar todos los item de la Requisicion";
-          } else {
-             echo 'Error el Item y el tipo de Requisicion no coinciden';
-          }
+
+             $horas = $actividades->mostrarHoras($nombreAct);
+             $horasprox = $horas['horas'] + $horastemp;
+             $rspta =$ods_mtto->insertarItem($nombreAct,$idrequest_tempP,$horasprox);
+             echo $rspta ? "Actividad cargada con exito":"No se pudieron registrar todas las actividades";
+
+    
 break;
 
     case 'listar':
@@ -76,7 +82,7 @@ break;
         while($reg = $rspta->fetch_object()){
            $data[]=array(
                "0"=>'<button class="btn btn-warning" onclick="mostrar('.$reg->idods_mtto.')"><i class="nav-icon icon-pencil" style="color:white" ></i></button> <button class="btn btn-danger" onclick="eliminar('.$reg->idods_mtto.')"><i class="fa fa-trash"></i></button>'.
- 					' <button class="btn btn-primary" onclick="mostrarP('.$reg->idods_mtto.')"><i class="fa fa-fire"></i></button> <button class="btn btn-success" onclick="confirmarP('.$reg->idods_mtto.')"><i class="fa fa fa-check"></i></button>',
+ 					' <button class="btn btn-primary" onclick="mostrarP('.$reg->idods_mtto.','.$reg->horas.')"><i class="fa fa-fire"></i></button> <button class="btn btn-success" onclick="confirmarP('.$reg->idods_mtto.')"><i class="fa fa fa-check"></i></button>',
                "1"=>$reg->codigo,
                "2"=>$reg->nombre,
                "3"=>$reg->com_falla,
@@ -113,7 +119,7 @@ break;
     $rspta = $ods_mtto->listarc();
     while ($reg = $rspta->fetch_object())
         {
-            echo '<option value=' .$reg->idrequest_temp. '>' .$reg->nombre. '</option>';
+            echo '<option value=' .$reg->idods_mtto. '>' .$reg->nombre. '</option>';
         }
     break;
 
@@ -132,10 +138,9 @@ break;
     $data = Array();
     while($reg = $rspta->fetch_object()){
        $data[]=array(
-           "0"=>'<button class="btn btn-danger" onclick="eliminarItem('.$reg->idrequest_items_temp.')"><i class="fa fa-trash"></i></button>',
-           "1"=>($reg->detalle) ? $reg->nombre.' '.$reg->detalle : $reg->nombre,
-           "2"=>$reg->cantidad,
-           "3"=>$reg->precio
+           "0"=>'<button class="btn btn-danger" onclick="eliminarItem('.$reg->idact_ods.')"><i class="fa fa-trash"></i></button>',
+           "1"=>$reg->nombre,
+           "2"=>$reg->horasprox
        );
     }
     /*CARGAMOS LA DATA EN LA VARIABLE USADA PARA EL DATATABLE*/
@@ -148,164 +153,8 @@ break;
     break;
 
     case 'confirmarP':
-    $rspta = $ods_mtto->mostrarObj($idods_mtto);
-    while($reg = $rspta->fetch_object() ){
-        switch ($reg->iddepartamento) {
-            case 1:
-                # MTTO
-                $dpto = 'request_mtto';
-                $dptoOC = 'odc_mtto';
-                $codigo = '';
-                $codigoOC = '';
-                $validarFecha = $ods_mtto->validarAnterior($reg->iddepartamento,$reg->fecha);
-                $validarFecha2 = $ods_mtto->validarSiguiente($reg->iddepartamento,$reg->fecha);
-                if( $validarFecha == 0 && $validarFecha2 == 0 ){
-
-                    $rspta2 = $ods_mtto->insertR($reg->idrequest_temp,$dpto,$reg->fecha);
-                    // $rspta5 = $ods_mtto->insertOC($reg->idrequest_temp,$dptoOC,$reg->fecha);
-
-                    if( $rspta2 != "0" ){
-                        if( $rspta2 < 10 ){
-                            $codigo = 'RQ/GGO/MT-00'.$rspta2; /* AGREGAR IF DE 00 */
-                        } else if ( $rspta2 < 100 ){
-                            $codigo = 'RQ/GGO/MT-0'.$rspta2; /* AGREGAR IF DE 00 */
-                        } else {
-                            $codigo = 'RQ/GGO/MT-'.$rspta2; /* AGREGAR IF DE 00 */
-                        }
-
-                        //if( $rspta5 < 10 ){
-                        //    $codigoOC = 'OC/GGO/MT-00'.$rspta2; /* AGREGAR IF DE 00 */
-                        // } else if ( $rspta2 < 100 ){
-                        //    $codigoOC = 'OC/GGO/MT-0'.$rspta2; /* AGREGAR IF DE 00 */
-                        // } else {
-                        //    $codigoOC = 'OC/GGO/MT-'.$rspta2; /* AGREGAR IF DE 00 */
-                        // }
-
-                        $rspta3 = $ods_mtto->updateR($reg->idrequest_temp,$dpto,$codigo);
-                        // $rspta6 = $ods_mtto->updateOC($reg->idrequest_temp,$dptoOC,$codigoOC,1);
-                        $rspta4 = $ods_mtto->vincular($reg->idrequest_temp);
-
-                        echo $rspta3 ? "Requisicion almacenada": "Requisicion no se puede almacenar";
-                        break;
-                       
-                    } else {
-                        echo 'Error al insertar requisicion ya existe';
-                    }
-                } else {
-                    echo 'Error existe una requisicion pendiente para la fecha';
-                }
-                 break;
-            
-            case 2:
-                # OPERACIONES
-                $dpto = 'request_op';
-                $dptoOC = 'odc_op';
-                $codigo = '';
-                $codigoOC = '';
-                $validarFecha = $ods_mtto->validarAnterior($reg->iddepartamento,$reg->fecha);
-                $validarFecha2 = $ods_mtto->validarSiguiente($reg->iddepartamento,$reg->fecha);
-                if( $validarFecha == 0 && $validarFecha2 == 0 ){
-
-                    $validarItem = $ods_mtto->validarItem($reg->idrequest_temp);
-
-                    if( $validarItem != 0 ){
-
-                        $rspta2 = $ods_mtto->insertR($reg->idrequest_temp,$dpto,$reg->fecha);
-                        $rspta5 = $ods_mtto->insertOC($reg->idrequest_temp,$dptoOC,$reg->fecha);
-    
-                        if( $rspta2 != "0" ){
-                            if( $rspta2 < 10 ){
-                                $codigo = 'RQ/GGO/OP-00'.$rspta2; /* AGREGAR IF DE 00 */
-                            } else if ( $rspta2 < 100 ){
-                                $codigo = 'RQ/GGO/OP-0'.$rspta2; /* AGREGAR IF DE 00 */
-                            } else {
-                                $codigo = 'RQ/GGO/OP-'.$rspta2; /* AGREGAR IF DE 00 */
-                            }
-    
-                            if( $rspta5 < 10 ){
-                                $codigoOC = 'OC/GGO/OP-00'.$rspta2; /* AGREGAR IF DE 00 */
-                            } else if ( $rspta2 < 100 ){
-                                $codigoOC = 'OC/GGO/OP-0'.$rspta2; /* AGREGAR IF DE 00 */
-                            } else {
-                                $codigoOC = 'OC/GGO/OP-'.$rspta2; /* AGREGAR IF DE 00 */
-                            }
-    
-                            $rspta3 = $ods_mtto->updateR($reg->idrequest_temp,$dpto,$codigo);
-                            $rspta6 = $ods_mtto->updateOC($reg->idrequest_temp,$dptoOC,$codigoOC,1);
-                            $rspta4 = $ods_mtto->vincular($reg->idrequest_temp);
-    
-                            echo $rspta3 ? "Requisicion almacenada": "Requisicion no se puede almacenar";
-                            break;
-                           
-                        } else {
-                            echo 'Error al insertar requisicion ya existe';
-                        }
-
-                    } else {
-                        echo 'Error esta requisicion no tiene items asociados';
-                    }
-
-                } else {
-                    echo 'Error existe una requisicion pendiente para la fecha';
-                }
-                 break;
-        
-            case 3:
-                # ALMACEN
-                $dpto = 'request_al';
-                $dptoOC = 'odc_al';
-                $codigo = '';
-                $codigoOC = '';
-                $validarFecha = $ods_mtto->validarAnterior($reg->iddepartamento,$reg->fecha);
-                $validarFecha2 = $ods_mtto->validarSiguiente($reg->iddepartamento,$reg->fecha);
-                if( $validarFecha == 0 && $validarFecha2 == 0 ){
- 
-                     $validarItem = $ods_mtto->validarItem($reg->idrequest_temp);
- 
-                     if( $validarItem != 0 ){
- 
-                         $rspta2 = $ods_mtto->insertR($reg->idrequest_temp,$dpto,$reg->fecha);
-                         $rspta5 = $ods_mtto->insertOC($reg->idrequest_temp,$dptoOC,$reg->fecha);
-     
-                         if( $rspta2 != "0" ){
-                             if( $rspta2 < 10 ){
-                                 $codigo = 'RQ/GGO/AL-00'.$rspta2; /* AGREGAR IF DE 00 */
-                             } else if ( $rspta2 < 100 ){
-                                 $codigo = 'RQ/GGO/AL-0'.$rspta2; /* AGREGAR IF DE 00 */
-                             } else {
-                                 $codigo = 'RQ/GGO/AL-'.$rspta2; /* AGREGAR IF DE 00 */
-                             }
-     
-                             if( $rspta5 < 10 ){
-                                 $codigoOC = 'OC/GGO/AL-00'.$rspta2; /* AGREGAR IF DE 00 */
-                             } else if ( $rspta2 < 100 ){
-                                 $codigoOC = 'OC/GGO/AL-0'.$rspta2; /* AGREGAR IF DE 00 */
-                             } else {
-                                 $codigoOC = 'OC/GGO/AL-'.$rspta2; /* AGREGAR IF DE 00 */
-                             }
-     
-                             $rspta3 = $ods_mtto->updateR($reg->idrequest_temp,$dpto,$codigo);
-                             $rspta6 = $ods_mtto->updateOC($reg->idrequest_temp,$dptoOC,$codigoOC,1);
-                             $rspta4 = $ods_mtto->vincular($reg->idrequest_temp);
-     
-                             echo $rspta3 ? "Requisicion almacenada": "Requisicion no se puede almacenar";
-                             break;
-                            
-                         } else {
-                             echo 'Error al insertar requisicion ya existe';
-                         }
- 
-                     } else {
-                         echo 'Error esta requisicion no tiene items asociados';
-                     }
- 
-                 } else {
-                     echo 'Error existe una requisicion pendiente para la fecha';
-                 }
-                  break;
-        }
-    }
-
+        $rspta = $ods_mtto->updateR($idods_mtto);
+        echo $rspta ? "Orden Almacenada": "Orden no se puede almacenar";
     break;        
 
 }

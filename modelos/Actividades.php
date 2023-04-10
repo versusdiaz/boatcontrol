@@ -53,4 +53,9 @@ class Actividades{
         return Consulta_num($sql); 
     }
 
+    public static function mostrarHoras($idact){
+        $sql = "SELECT horas FROM act WHERE idact='$idact'";
+        return ConsultaFila($sql);
+    }
+    
 }

@@ -191,33 +191,15 @@
                 <div class="card-body" id="formularioPurchase">
                     <form name="formulario" id="formularioP" method="POST">
                         <div class="row">
-                            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group col-lg-12 col-md-6 col-sm-6 col-xs-6">
                             <input type="hidden" name="idrequest_tempP" id="idrequest_tempP">
+                            <input type="hidden" name="horastemp" id="horastemp">
                             <label class="col-sm-12 control-label">Nombre *:</label>
-                            <input type="hidden" name="iditems" id="iditems">
                                 <div class="col-sm-12">
-                                    <select class="form-control selectpicker" data-live-search="true" name="nombreItem" id="nombreItem">
+                                    <select class="form-control selectpicker" data-live-search="true" name="nombreAct" id="nombreAct">
                                     </select>
                                 </div>
-                            </div>
-                            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                <label class="col-sm-12 control-label">Cantidad *:</label>
-                                <div class="col-sm-12">
-                                    <input type="number" class="form-control" name="cantidad" id="cantidad" min='0.1' step='0.1' value='1' >
-                                </div>
-                            </div>                            
-                            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6 formDetalle">
-                                <label class="col-sm-12 control-label">Detalle *:</label>
-                                <div class="col-sm-12">
-                                    <input type="text" class="form-control" name="detalle" id="detalle" >
-                                </div>
-                            </div>
-                            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6 formDetalle">
-                                <label class="col-sm-12 control-label">Precio *:</label>
-                                <div class="col-sm-12">
-                                    <input type="number" class="form-control" name="precio" id="precio" step='0.01' >
-                                </div>
-                            </div>
+                            </div>                          
                             <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <button class="btn btn-primary" type="submit" id="btnGuardarP">
                                     <i class="fa fa-download"></i> Cargar</button>
@@ -242,12 +224,14 @@
                                 <thead>
                                     <th>Opciones</th>
                                     <th>Nombre</th>
+                                    <th>Prox. Ejecucion(HR)</th>
                                 </thead>
                                 <tbody>
                                 </tbody>
                                 <tfoot>
                                     <th>Opciones</th>
                                     <th>Nombre</th>
+                                    <th>Prox. Ejecucion(HR)</th>
                                 </tfoot>
                             </table>
                         </div>
