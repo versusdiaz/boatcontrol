@@ -46,7 +46,7 @@
                     <i class="nav-icon icon-control-play"></i> Crear Ordenes</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="ods_mtto">
+                  <a class="nav-link" href="ods_list">
                     <i class="nav-icon icon-control-forward"></i> Ordenes en Archivo</a>
                 </li>     
               </ul>
