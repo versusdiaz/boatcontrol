@@ -51,6 +51,11 @@
                 </li>     
               </ul>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="reportes">
+                <i class="nav-icon icon-chart"></i> Reportes
+              </a>
+            </li>
           </ul>
         </nav>
         <button class="sidebar-minimizer brand-minimizer" type="button"></button>

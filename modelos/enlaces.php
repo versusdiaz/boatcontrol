@@ -5,6 +5,7 @@ class EnlacesModels{
 
     public static function enlacesModels($enlaces){
         if($enlaces == "centro" ||
+           $enlaces == "reportes" ||
            $enlaces == "ods_list" ||
            $enlaces == "ods_mtto" ||
            $enlaces == "actividades" ||
