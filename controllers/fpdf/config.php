@@ -78,39 +78,39 @@
 
                 $this->SetFont('Arial','B',6);
                 $this->SetXY(136,42);
-                $this ->MultiCell(20,5,'AFECTA EJECUCION DEL SERVICIO', 'LRT', 'C', 0);
+                $this ->MultiCell(20,5,'AFECTA EJECUCION DEL SERVICIO', 'LRTB', 'C', 0);
 
                 $this->SetXY(156,42);
-                $this->Cell(68,15,'MANTENIMIENTO REALIZADO', 'LRT', 0, 'C',true);
+                $this->Cell(68,15,'MANTENIMIENTO REALIZADO', 'LRTB', 0, 'C',true);
 
                 $this->SetXY(224,42);
-                $this ->MultiCell(21,5,'TIEMPO DE MANTENIMIENTO (HRS)', 'LRT', 'C', true);
+                $this ->MultiCell(21,5,'TIEMPO DE MANTENIMIENTO (HRS)', 'LRTB', 'C', true);
 
                 $this->SetXY(245,42);
-                $this ->MultiCell(20,5,'TIEMPO INOPERATIVO (HRS)', 'LRT', 'C', true);
+                $this ->MultiCell(20,5,'TIEMPO INOPERATIVO (HRS)', 'LRTB', 'C', true);
 
                 // BAJO LINEA DE EMBARCACION
 
                 $this->SetXY(10,47);
-                $this->Cell(10,10,'ITEM', 'LRT', 0, 'C',true);
+                $this->Cell(10,10,'ITEM', 'LRTB', 0, 'C',true);
 
                 $this->SetXY(20,47);
-                $this ->MultiCell(16,5,'ORDEN DE SERVICIO', 'LRT', 'C', true);
+                $this ->MultiCell(16,5,'ORDEN DE SERVICIO', 'LRTB', 'C', true);
 
                 $this->SetXY(36,47);
-                $this->Cell(16,10,'FECHA', 'LRT', 0, 'C',true);
+                $this->Cell(16,10,'FECHA', 'LRTB', 0, 'C',true);
 
                 $this->SetXY(52,47);
-                $this ->MultiCell(22,5,'TIPO DE MANTENIMIENTO', 'LRT', 'C', true);
+                $this ->MultiCell(22,5,'TIPO DE MANTENIMIENTO', 'LRTB', 'C', true);
 
                 $this->SetXY(74,47);
-                $this->Cell(16,10,'SISTEMA', 'LRT', 0, 'C',true);
+                $this->Cell(16,10,'SISTEMA', 'LRTB', 0, 'C',true);
 
                 $this->SetXY(90,47);
-                $this ->MultiCell(23,5,'SITUACION ENCONTRADA', 'LRT', 'C', true);
+                $this ->MultiCell(23,5,'SITUACION ENCONTRADA', 'LRTB', 'C', true);
 
                 $this->SetXY(113,47);
-                $this ->MultiCell(23,5,'INDICIO DE FALLA (SI APLICA)', 'LRT', 'C', true);
+                $this ->MultiCell(23,5,'INDICIO DE FALLA (SI APLICA)', 'LRTB', 'C', true);
 
                 $this->SetXY(10,57);
 
@@ -119,37 +119,38 @@
             /*FOOTER UNIVERSAL*/
             function Footer()
             {
-                $x = $this->getX();
-                $y = $this->getY();
-   
-                $this->SetXY($x,$y);
-                $this->SetFont('Arial','B',8);
-                $this->Cell(30,5,'', 'LRT', 0, 'L');
-                $this->Cell(81,5,'ELABORADO POR', 1, 0, 'C', true);
-                $this->Cell(81,5,'APROBADO POR', 1, 0, 'C', true);
-
-                $this->SetXY($x,$y+5);
-
-                $this->SetFont('Arial','',6);
-                $this->Cell(30,5,'NOMBRE Y APELLIDO:', 'LRT', 0, 'L');
-                $this->Cell(81,5,''.'', 1, 0, 'L');
-                $this->Cell(81,5,''.'', 1, 0, 'L');
-
-                $this->SetXY($x,$y+10);
-                $this->Cell(30,5,'CARGO:', 'LRT', 0, 'L');
-                $this->Cell(81,5,'', 1, 0, 'L');
-                $this->Cell(81,5,'', 1, 0, 'L');
-
-                $this->SetXY($x,$y+15);
-                $this->Cell(30,5,'FIRMA:', 'LRT', 0, 'L');
-                $this->Cell(81,5,'', 1, 0, 'L');
-                $this->Cell(81,5,'', 1, 0, 'L');
-
-                $this->SetXY($x,$y+20);
-                $this->Cell(30,5,'FECHA:', 1, 0, 'L');
-                $this->Cell(81,5,''.date('d/m/Y',strtotime($this->fecha)), 1, 0, 'L');
-                $this->Cell(81,5,''.date('d/m/Y',strtotime($this->fecha)), 1, 0, 'L');
             }
+
+
+             function tablaHistorial($data){
+                 // Column widths
+                 $w = array(10, 16, 16, 22, 16, 23, 23, 20, 68, 21, 20);
+                 // Header
+                 $nitem = 1;
+                 $this->SetFont('Arial','',6);
+                  // Data
+                 foreach($data as $row)
+                 {
+
+                     $this->Cell($w[0],6,$nitem,'LRB',0,'C');
+                     $this->Cell($w[1],6,$row['codigo'],'LRB',0,'C');
+                     $this->Cell($w[2],6,date('d/m/Y',strtotime($row['fecha'])),'LRB',0,'C');
+                     $this->Cell($w[3],6,$row['tipo'] == 1 ? 'Correctivo' : 'Preventivo','LRB',0,'C');
+                     $this->Cell($w[4],6,utf8_decode($row['sistema']),'LRB',0,'C');
+                     $this->Cell($w[5],6,utf8_decode($row['com_estado']),'LRB',0,'C');
+                     $this->Cell($w[6],6,utf8_decode($row['com_falla']),'LRB',0,'C');
+                     $this->Cell($w[7],6,$row['afectaservicio']  == 1 ? 'Si' : 'No','LRB',0,'C');
+                     $this->Cell($w[8],6,utf8_decode($row['com_general']),'LRB',0,'C');
+                     $this->Cell($w[9],6,$row['tiempo_mtto'],'LRB',0,'C');
+                     $this->Cell($w[10],6,$row['tiempo_ino'],'LRB',0,'C');
+
+                     $this->Ln();
+                     $nitem++;
+                }
+
+                 // Closing line
+                 $this->Cell(array_sum($w),0,'','T');
+             }
 
             // function tablaReq($header, $data){
             //     // Column widths

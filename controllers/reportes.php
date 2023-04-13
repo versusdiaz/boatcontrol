@@ -20,10 +20,20 @@ switch ($_GET["op"]) {
              $revision = '00';
              $titulo = 'HISTORIAL DE MANTENIMIENTO A EMBARCACIONES';
              $nombreCentro = $report->mostrarCentro($idcentro);
+             $dataCentro = $report->dataCentro($idcentro);
 
             $pdf = new PDF($codigo,$fecha,$revision,$titulo,$nombreCentro['nombre']);
             $pdf->AddPage('L', 'Letter', 0);
             $pdf->SetFillColor(198, 198, 247);
+
+            // GENERO LA TABLA Y RETORNO EL SUBTOTAL
+            $pdf->tablaHistorial($dataCentro);
+
+            $pdf->ln();
+
+            $x = $pdf->getX();
+            $y = $pdf->getY();
+
             $pdf->ln();
 
             // /*NOMBRE ARCHIVO*/
