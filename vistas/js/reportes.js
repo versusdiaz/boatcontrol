@@ -20,7 +20,7 @@ function init(){
         formData.append("idcentro",idcentro);
 
          $.ajax({
-            url:"controllers/reporte.php?op=reporteHistorial",
+            url:"controllers/reportes.php?op=reporteHistorial",
             type:"POST",
             data: formData,
             contentType: false,
