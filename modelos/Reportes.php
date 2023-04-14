@@ -7,7 +7,7 @@ class Reportes{
     }
 
     public static function dataCentro($idcentro){
-        $sql = "SELECT T1.idods_mtto, T1.codigo, T1.com_general, T2.nombre, T1.sistema, T1.com_estado, T1.tipo, T1.com_falla, T1.fecha, T1.horas, T1.afectaservicio, T1.costo, T1.tiempo_ino, T1.tiempo_mtto FROM ods_mtto AS T1 LEFT JOIN centro AS T2 ON T1.idcentro = T2.idcentro WHERE T1.idcentro = $idcentro ORDER BY idods_mtto ASC";
+        $sql = "SELECT T1.idods_mtto, T1.codigo, T1.com_general, T2.nombre, T1.sistema, T1.com_estado, T1.tipo, T1.com_falla, T1.fecha, T1.horas, T1.afectaservicio, T1.costo, T1.tiempo_ino, T1.tiempo_mtto FROM ods_mtto AS T1 LEFT JOIN centro AS T2 ON T1.idcentro = T2.idcentro WHERE T1.idcentro = $idcentro ORDER BY idods_mtto DESC";
         return Consulta($sql);
     }
 

@@ -34,7 +34,12 @@ switch ($_GET["op"]) {
             $x = $pdf->getX();
             $y = $pdf->getY();
 
+            $pdf->SetXY($x,$y+10);
+            $pdf->SetFont('Arial','',12);
+            $pdf->Cell(255,5,'RESUMEN INDICADORES 2023', 'LTRB', 0, 'C');
             $pdf->ln();
+
+            $pdf->tablaIndicador($dataCentro);
 
             // /*NOMBRE ARCHIVO*/
             $narchivo = 'RQ_'.round(microtime(true));

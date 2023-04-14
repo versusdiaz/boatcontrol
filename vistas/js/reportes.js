@@ -36,7 +36,8 @@ function init(){
                 , confirmButtonText: "Imprimir!"
                 , closeOnConfirm: true
                 }, function () {
-                    window.open(respuesta,"_blank");
+                    // window.open(respuesta,"_blank");
+                    alert(respuesta);
                 });
             }
          });
