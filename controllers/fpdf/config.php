@@ -52,7 +52,7 @@
     
                 $this->SetXY(45,18);
                 $this->SetFont('Arial','',14);
-                $this->Cell(220,20, utf8_decode("SISTEMA DE GESTIÓN DE LA CALIDAD"), 1, 0, 'L');
+                $this->Cell(220,20, utf8_decode("SISTEMA DE GESTIÓN DE LA CALIDAD           "), 1, 0, 'C');
     
                 $this->SetXY(229,18);
                 $this->SetFont('Arial','',8);
@@ -180,7 +180,6 @@
                 $tiempototal = 0;
                 $tiempoino = 0;
                 $tiempoinototal = 0;
-                $datorandom = '';
 
                 $tiempoinototal01 = 0;
                 $tiempoinototal02 = 0;
@@ -229,7 +228,7 @@
 
 
                     if($validarFechaEnero == true ){
-                        $datorandom = 'Es enero';
+
                         $tiempoinototal01 = $tiempoinototal01+$row['tiempo_ino'];
                         $tiempoMttoTotal01 = $tiempoMttoTotal01+$row['tiempo_mtto'];
 
@@ -237,149 +236,147 @@
                     else if ($validarFechaFebrero == true) {
                         $tiempoinototal02 = $tiempoinototal02+$row['tiempo_ino'];
                         $tiempoMttoTotal02 = $tiempoMttoTotal02+$row['tiempo_mtto'];
-                        $datorandom = 'es febrero';
+                        
                     }
                      else if ($validarFechaMarzo == true) {
                         $tiempoinototal03 = $tiempoinototal03+$row['tiempo_ino'];
                         $tiempoMttoTotal03 = $tiempoMttoTotal03+$row['tiempo_mtto'];
-                        $datorandom = 'No es marzo';
+                        
                     }
                     else if ($validarFechaAbril == true) {
                         $tiempoinototal04 = $tiempoinototal04+$row['tiempo_ino'];
                         $tiempoMttoTotal04 = $tiempoMttoTotal04+$row['tiempo_mtto'];
-                        $datorandom = 'es Abril';
+                        
                     }
                     else if ($validarFechaMayo == true) {
                         $tiempoinototal05 = $tiempoinototal05+$row['tiempo_ino'];
                         $tiempoMttoTotal05 = $tiempoMttoTotal05+$row['tiempo_mtto'];
 
-                        $datorandom = 'es Mayo';
+                        
                     }
                     else if ($validarFechaJunio == true) {
                         $tiempoinototal06 = $tiempoinototal06+$row['tiempo_ino'];
                         $tiempoMttoTotal06 = $tiempoMttoTotal06+$row['tiempo_mtto'];
-                        $datorandom = 'es Junio';
+                        
                     }
                     else if ($validarFechaJulio == true) {
                         $tiempoinototal07 = $tiempoinototal07+$row['tiempo_ino'];
                         $tiempoMttoTotal07 = $tiempoMttoTotal07+$row['tiempo_mtto'];
-                        $datorandom = 'es Julio';
+                        
                     }
                     else if ($validarFechaAgosto == true) {
                         $tiempoinototal08 = $tiempoinototal08+$row['tiempo_ino'];
                         $tiempoMttoTotal08 = $tiempoMttoTotal08+$row['tiempo_mtto'];
-                        $datorandom = 'es Agosto';
+                        
                     }
                     else if ($validarFechaSeptiembre == true) {
                         $tiempoinototal09 = $tiempoinototal09+$row['tiempo_ino'];
                         $tiempoMttoTotal09 = $tiempoMttoTotal09+$row['tiempo_mtto'];
-                        $datorandom = 'es Septiembre';
+                        
                     }
                     else if ($validarFechaOctubre == true) {
                         $tiempoinototal10 = $tiempoinototal10+$row['tiempo_ino'];
                         $tiempoMttoTotal10 = $tiempoMttoTotal10+$row['tiempo_mtto'];
-                        $datorandom = 'es Octubre';
+                        
                     }
                     else if ($validarFechaNoviembre == true) {
                         $tiempoinototal11 = $tiempoinototal11+$row['tiempo_ino'];
                         $tiempoMttoTotal11 = $tiempoMttoTotal11+$row['tiempo_mtto'];
-                        $datorandom = 'es Noviembre';
+                        
                     }
                     else {
                         $tiempoinototal12 = $tiempoinototal12+$row['tiempo_ino'];
                         $tiempoMttoTotal12 = $tiempoMttoTotal12+$row['tiempo_mtto'];
-                        $datorandom = 'es diciembre';
+                        
                     }
 
-                    $this->Cell($w[0],6,$nitem,'LRB',0,'C');
-                    $this->Cell($w[1],6,$row['codigo'],'LRB',0,'C');
-                    $this->Cell($w[2],6,date('d/m/Y',strtotime($row['fecha'])),'LRB',0,'C');
-                    $this->Cell($w[3],6,$row['tipo'] == 1 ? 'Correctivo' : 'Preventivo','LRB',0,'C');
-                    $this->Cell($w[4],6,utf8_decode($row['sistema']),'LRB',0,'C');
-                    $this->Cell($w[5],6,utf8_decode($row['com_estado']),'LRB',0,'C');
-                    $this->Cell($w[6],6,$datorandom,'LRB',0,'C');
-                    $this->Cell($w[7],6,$row['afectaservicio']  == 1 ? 'Si' : 'No','LRB',0,'C');
-                    $this->Cell($w[8],6,utf8_decode($row['com_general']),'LRB',0,'C');
-                    $this->Cell($w[9],6,$row['tiempo_mtto'],'LRB',0,'C');
-
-                    // RECORDAR BORRAR ESTA PRUEBA
-                    $tiempoinototal = $tiempoinototal+$row['tiempo_ino'];
-
-                    $this->Cell($w[10],6,$tiempoinototal,'LRB',0,'C');
-
-                    
-
-                    $this->Ln();
-                    $nitem++;
                }
 
-                // Closing line
-                $this->Cell(array_sum($w),0,'','T');
-
                // MUESTRO LOS VALORES
-               $this->Ln();
                $x = $this->getX();
                $y = $this->getY();
                
-               $this->SetXY($x,$y+10);
+               $this->SetXY($x,$y);
                $this->SetFont('Arial','',8);
-               // Tiempo total Disponible
-               $tiempototal01 = ( ($tiempo - $tiempoinototal01) / $tiempo ); 
-               $tiempototal02 = ( ($tiempo - $tiempoinototal02) / $tiempo ); 
-               $tiempototal03 = ( ($tiempo - $tiempoinototal03) / $tiempo ); 
-               $tiempototal04 = ( ($tiempo - $tiempoinototal04) / $tiempo ); 
-               $tiempototal05 = ( ($tiempo - $tiempoinototal05) / $tiempo ); 
-               $tiempototal06 = ( ($tiempo - $tiempoinototal06) / $tiempo ); 
-               $tiempototal07 = ( ($tiempo - $tiempoinototal07) / $tiempo ); 
-               $tiempototal08 = ( ($tiempo - $tiempoinototal08) / $tiempo ); 
-               $tiempototal09 = ( ($tiempo - $tiempoinototal09) / $tiempo ); 
-               $tiempototal10 = ( ($tiempo - $tiempoinototal10) / $tiempo ); 
-               $tiempototal11 = ( ($tiempo - $tiempoinototal11) / $tiempo ); 
-               $tiempototal12 = ( ($tiempo - $tiempoinototal12) / $tiempo ); 
+               // Tiempo total Disponible (Si es 0 entoces no realiza la formula)
+               $tiempototal01 = ($tiempoinototal01 == 0 ? 0 : ( ($tiempo - $tiempoinototal01) / $tiempo )); 
+               $tiempototal02 = ($tiempoinototal02 == 0 ? 0 : ( ($tiempo - $tiempoinototal02) / $tiempo )); 
+               $tiempototal03 = ($tiempoinototal03 == 0 ? 0 : ( ($tiempo - $tiempoinototal03) / $tiempo ));
+               $tiempototal04 = ($tiempoinototal04 == 0 ? 0 : ( ($tiempo - $tiempoinototal04) / $tiempo ));
+               $tiempototal05 = ($tiempoinototal05 == 0 ? 0 : ( ($tiempo - $tiempoinototal05) / $tiempo ));
+               $tiempototal06 = ($tiempoinototal06 == 0 ? 0 : ( ($tiempo - $tiempoinototal06) / $tiempo )); 
+               $tiempototal07 = ($tiempoinototal07 == 0 ? 0 : ( ($tiempo - $tiempoinototal07) / $tiempo )); 
+               $tiempototal08 = ($tiempoinototal08 == 0 ? 0 : ( ($tiempo - $tiempoinototal08) / $tiempo ));
+               $tiempototal09 = ($tiempoinototal09 == 0 ? 0 : ( ($tiempo - $tiempoinototal09) / $tiempo )); 
+               $tiempototal10 = ($tiempoinototal10 == 0 ? 0 : ( ($tiempo - $tiempoinototal10) / $tiempo )); 
+               $tiempototal11 = ($tiempoinototal11 == 0 ? 0 : ( ($tiempo - $tiempoinototal11) / $tiempo )); 
+               $tiempototal12 = ($tiempoinototal12 == 0 ? 0 : ( ($tiempo - $tiempoinototal12) / $tiempo ));
 
                // Tiempo total en Mtto
 
-               $tiempototalMtto01 = ( ($tiempo - $tiempoMttoTotal01) / $tiempo ); 
-               $tiempototalMtto02 = ( ($tiempo - $tiempoMttoTotal02) / $tiempo ); 
-               $tiempototalMtto03 = ( ($tiempo - $tiempoMttoTotal03) / $tiempo ); 
-               $tiempototalMtto04 = ( ($tiempo - $tiempoMttoTotal04) / $tiempo ); 
-               $tiempototalMtto05 = ( ($tiempo - $tiempoMttoTotal05) / $tiempo ); 
-               $tiempototalMtto06 = ( ($tiempo - $tiempoMttoTotal06) / $tiempo ); 
-               $tiempototalMtto07 = ( ($tiempo - $tiempoMttoTotal07) / $tiempo ); 
-               $tiempototalMtto08 = ( ($tiempo - $tiempoMttoTotal08) / $tiempo ); 
-               $tiempototalMtto09 = ( ($tiempo - $tiempoMttoTotal09) / $tiempo ); 
-               $tiempototalMtto10 = ( ($tiempo - $tiempoMttoTotal10) / $tiempo ); 
-               $tiempototalMtto11 = ( ($tiempo - $tiempoMttoTotal11) / $tiempo ); 
-               $tiempototalMtto12 = ( ($tiempo - $tiempoMttoTotal12) / $tiempo ); 
+               $tiempototalMtto01 = ($tiempoMttoTotal01 == 0 ? 0 : ( ($tiempo - $tiempoMttoTotal01) / $tiempo ));
+               $tiempototalMtto02 = ($tiempoMttoTotal02 == 0 ? 0 : ( ($tiempo - $tiempoMttoTotal02) / $tiempo ));
+               $tiempototalMtto03 = ($tiempoMttoTotal03 == 0 ? 0 : ( ($tiempo - $tiempoMttoTotal03) / $tiempo ));
+               $tiempototalMtto04 = ($tiempoMttoTotal04 == 0 ? 0 : ( ($tiempo - $tiempoMttoTotal04) / $tiempo ));
+               $tiempototalMtto05 = ($tiempoMttoTotal05 == 0 ? 0 : ( ($tiempo - $tiempoMttoTotal05) / $tiempo ));
+               $tiempototalMtto06 = ($tiempoMttoTotal06 == 0 ? 0 : ( ($tiempo - $tiempoMttoTotal06) / $tiempo ));
+               $tiempototalMtto07 = ($tiempoMttoTotal07 == 0 ? 0 : ( ($tiempo - $tiempoMttoTotal07) / $tiempo ));
+               $tiempototalMtto08 = ($tiempoMttoTotal08 == 0 ? 0 : ( ($tiempo - $tiempoMttoTotal08) / $tiempo ));
+               $tiempototalMtto09 = ($tiempoMttoTotal09 == 0 ? 0 : ( ($tiempo - $tiempoMttoTotal09) / $tiempo )); 
+               $tiempototalMtto10 = ($tiempoMttoTotal10 == 0 ? 0 : ( ($tiempo - $tiempoMttoTotal10) / $tiempo ));
+               $tiempototalMtto11 = ($tiempoMttoTotal11 == 0 ? 0 : ( ($tiempo - $tiempoMttoTotal11) / $tiempo ));
+               $tiempototalMtto12 = ($tiempoMttoTotal12 == 0 ? 0 : ( ($tiempo - $tiempoMttoTotal12) / $tiempo ));
                
 
-               $this->Cell(20,5,number_format(($tiempototal01*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
-               $this->Cell(20,5,number_format(($tiempototal02*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
-               $this->Cell(20,5,number_format(($tiempototal03*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
-               $this->Cell(20,5,number_format(($tiempototal04*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
-               $this->Cell(20,5,number_format(($tiempototal05*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
-               $this->Cell(20,5,number_format(($tiempototal06*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
-               $this->Cell(20,5,number_format(($tiempototal07*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
-               $this->Cell(20,5,number_format(($tiempototal08*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
-               $this->Cell(20,5,number_format(($tiempototal09*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
-               $this->Cell(20,5,number_format(($tiempototal10*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
-               $this->Cell(20,5,number_format(($tiempototal11*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
-               $this->Cell(20,5,number_format(($tiempototal12*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
+               $this->Cell(21,5,number_format(($tiempototal01*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
+               $this->Cell(21,5,number_format(($tiempototal02*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
+               $this->Cell(21,5,number_format(($tiempototal03*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
+               $this->Cell(21,5,number_format(($tiempototal04*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
+               $this->Cell(21,5,number_format(($tiempototal05*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
+               $this->Cell(21,5,number_format(($tiempototal06*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
+               $this->Cell(21,5,number_format(($tiempototal07*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
+               $this->Cell(21,5,number_format(($tiempototal08*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
+               $this->Cell(21,5,number_format(($tiempototal09*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
+               $this->Cell(22,5,number_format(($tiempototal10*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
+               $this->Cell(22,5,number_format(($tiempototal11*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
+               $this->Cell(22,5,number_format(($tiempototal12*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
 
                $this->Ln();
 
-               $this->Cell(20,5,number_format(($tiempototalMtto01*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
-               $this->Cell(20,5,number_format(($tiempototalMtto02*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
-               $this->Cell(20,5,number_format(($tiempototalMtto03*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
-               $this->Cell(20,5,number_format(($tiempototalMtto04*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
-               $this->Cell(20,5,number_format(($tiempototalMtto05*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
-               $this->Cell(20,5,number_format(($tiempototalMtto06*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
-               $this->Cell(20,5,number_format(($tiempototalMtto07*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
-               $this->Cell(20,5,number_format(($tiempototalMtto08*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
-               $this->Cell(20,5,number_format(($tiempototalMtto09*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
-               $this->Cell(20,5,number_format(($tiempototalMtto10*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
-               $this->Cell(20,5,number_format(($tiempototalMtto11*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
-               $this->Cell(20,5,number_format(($tiempototalMtto12*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
+               // INDICADOR DE MTTO
+
+               $this->ln();
+               $this->SetFont('Arial','',8);
+               $this->Cell(255,5,'MANTENIBILIDAD POR MES % = (TIEMPO TOTAL - TIEMPO EN MANTENIMIENTO) / TIEMPO TOTAL ', 'LTRB', 0, 'C');
+               $this->ln();
+               $this->SetFont('Arial','B',8);
+               $this->Cell(21,5,'ENERO', 'LTRB', 0, 'C');
+               $this->Cell(21,5,'FEBRERO', 'LTRB', 0, 'C');
+               $this->Cell(21,5,'MARZO', 'LTRB', 0, 'C');
+               $this->Cell(21,5,'ABRIL', 'LTRB', 0, 'C');
+               $this->Cell(21,5,'MAYO', 'LTRB', 0, 'C');
+               $this->Cell(21,5,'JUNIO', 'LTRB', 0, 'C');
+               $this->Cell(21,5,'JULIO', 'LTRB', 0, 'C');
+               $this->Cell(21,5,'AGOSTO', 'LTRB', 0, 'C');
+               $this->Cell(21,5,'SEPTIEMBRE', 'LTRB', 0, 'C');
+               $this->Cell(22,5,'OCTUBRE', 'LTRB', 0, 'C');
+               $this->Cell(22,5,'NOVIEMBRE', 'LTRB', 0, 'C');
+               $this->Cell(22,5,'DICIEMBRE', 'LTRB', 0, 'C');
+               $this->SetFont('Arial','',8);
+               $this->ln();
+
+               $this->Cell(21,5,number_format(($tiempototalMtto01*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
+               $this->Cell(21,5,number_format(($tiempototalMtto02*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
+               $this->Cell(21,5,number_format(($tiempototalMtto03*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
+               $this->Cell(21,5,number_format(($tiempototalMtto04*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
+               $this->Cell(21,5,number_format(($tiempototalMtto05*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
+               $this->Cell(21,5,number_format(($tiempototalMtto06*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
+               $this->Cell(21,5,number_format(($tiempototalMtto07*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
+               $this->Cell(21,5,number_format(($tiempototalMtto08*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
+               $this->Cell(21,5,number_format(($tiempototalMtto09*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
+               $this->Cell(22,5,number_format(($tiempototalMtto10*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
+               $this->Cell(22,5,number_format(($tiempototalMtto11*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
+               $this->Cell(22,5,number_format(($tiempototalMtto12*100), 2, '.', ',').'%', 'LTRB', 0, 'C');
 
                $this->Ln();
 

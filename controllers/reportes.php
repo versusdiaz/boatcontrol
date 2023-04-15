@@ -35,8 +35,27 @@ switch ($_GET["op"]) {
             $y = $pdf->getY();
 
             $pdf->SetXY($x,$y+10);
-            $pdf->SetFont('Arial','',12);
-            $pdf->Cell(255,5,'RESUMEN INDICADORES 2023', 'LTRB', 0, 'C');
+            $pdf->SetFont('Arial','B',12);
+            $pdf->SetXY($x,$y+15);
+            $pdf->Cell(255,5,'RESUMEN INDICADORES 2023', 'LTRB', 0, 'C',true);
+            $pdf->ln();
+            $pdf->SetFont('Arial','',8);
+            $pdf->Cell(255,5,'DISPONIBILIDAD POR MES % = (TIEMPO TOTAL - TIEMPO INOPERATIVO) / TIEMPO TOTAL ', 'LTRB', 0, 'C');
+            $pdf->ln();
+            $pdf->SetFont('Arial','B',8);
+            $pdf->Cell(21,5,'ENERO', 'LTRB', 0, 'C');
+            $pdf->Cell(21,5,'FEBRERO', 'LTRB', 0, 'C');
+            $pdf->Cell(21,5,'MARZO', 'LTRB', 0, 'C');
+            $pdf->Cell(21,5,'ABRIL', 'LTRB', 0, 'C');
+            $pdf->Cell(21,5,'MAYO', 'LTRB', 0, 'C');
+            $pdf->Cell(21,5,'JUNIO', 'LTRB', 0, 'C');
+            $pdf->Cell(21,5,'JULIO', 'LTRB', 0, 'C');
+            $pdf->Cell(21,5,'AGOSTO', 'LTRB', 0, 'C');
+            $pdf->Cell(21,5,'SEPTIEMBRE', 'LTRB', 0, 'C');
+            $pdf->Cell(22,5,'OCTUBRE', 'LTRB', 0, 'C');
+            $pdf->Cell(22,5,'NOVIEMBRE', 'LTRB', 0, 'C');
+            $pdf->Cell(22,5,'DICIEMBRE', 'LTRB', 0, 'C');
+
             $pdf->ln();
 
             $pdf->tablaIndicador($dataCentro);
