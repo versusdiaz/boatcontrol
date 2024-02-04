@@ -43,9 +43,9 @@
                             </div>
                             <div class="box-body">
                                 <button type="button" class="btn btn-social btn-block btn-lg btn-github" onclick="mostrarform(true,1)">
-                                    <i class="fa fa-paypal"></i>Historial por Embarcacion</button>
+                                    <i class="fa fa-paypal"></i>Historiales por Embarcacion</button>
                                 <button type="button" class="btn btn-social btn-block btn-lg btn-github" onclick="mostrarform(true,2)">
-                                    <i class="fa fa-paypal"></i>Hoja de vida</button>
+                                    <i class="fa fa-paypal"></i>Programas de Mtto. Preventivo</button>
                                 <button type="button" class="btn btn-social btn-block btn-lg btn-github" onclick="mostrarform(true,3)">
                                     <i class="fa fa-paypal"></i>Resumen Pronto-Pago</button>
                                 <button type="button" class="btn btn-social btn-block btn-lg btn-github" onclick="mostrarform(true,4)">
@@ -80,38 +80,31 @@
                             </div>
                         </div>
                         <!-- /BOXPRIMARY -->
-                        <!-- INICIO DEL BOX DE REPORTES -->
                         <div class="box box-primary reportes" id="cuadro2">
                             <div class="box-header" style="padding-bottom:0px">
                                 <i class="fa fa-print"></i>
-                                <h3 class="box-title">Detalle de Ticket</h3>
+                                <h3 class="box-title">Control del Programa de Mantenimiento Preventivo</h3>
                             </div>
                             <div class="panel-body" id="formularioregistros">
-                                <form name="formulario3" id="formulario3" method="POST">
+                                <form name="formulario2" id="formulario2" method="POST">
                                     <div class="form-group">
-                                        <label class="col-sm-3 col-xs-12 control-label">No de Ticket</label>
-                                    </div>
-                                    <div class="input-group margin col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                                        <input type="number" class="form-control" name="ticket" id="ticket" required min="1">
-                                        <input type="hidden" class="form-control" name="idchofer" id="idchofer">
-                                        <input type="hidden" class="form-control" id="numeroform" name ="numeroform">
-                                        <span class="input-group-btn">
-                                            <button type="submit" name="btnTicket" id="btnTicket" class="btn btn-danger btn-flat">Imprimir</button>
-                                        </span>
+                                        <label class="col-sm-3 col-xs-12 control-label">Embarcacion:</label>
+                                        <!-- INCLUIMOS LA CLASE SELECTPICKER -->
+                                        <div class="input-group col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                        <select id="idcentro2" class="form-control selectpicker" data-live-search="true" name="idcentro2"></select>
+                                        </div>
                                     </div>
                                     <div class="clearfix"></div>
-                                    <label class="col-sm-3 col-xs-12 control-label">Empresa:</label>
-                                    <!-- INCLUIMOS LA CLASE SELECTPICKER -->
                                     <div class="input-group col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                                        <select id="idempresa3" class="form-control selectpicker" data-live-search="true" name="idempresa" required>
-                                            <option value="">--</option>
-                                            <option value="1">TRANSMARIM</option>
-                                            <option value="2">CARIBBEAN</option>
-                                        </select>
+                                        <span class="input-group-btn">
+                                            <button type="submit" name="btnControlInterno" id="btnControlInterno" class="btn btn-danger btn-flat">Imprimir</button>
+                                        </span>
                                     </div>
+                                    <!-- /.input group -->
                                 </form>
                             </div>
                         </div>
+                        <!-- INICIO DEL BOX DE REPORTES -->
                         <!-- /BOXPRIMARY -->
                         <div class="box box-primary reportes" id="cuadro3">
                             <div class="box-header" style="padding-bottom:0px">

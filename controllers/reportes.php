@@ -9,6 +9,8 @@ $report = new Reportes();
 
 $idcentro=isset($_POST['idcentro'])? limpiarCadena($_POST['idcentro']):"";
 
+$idcentro2=isset($_POST['idcentro2'])? limpiarCadena($_POST['idcentro2']):"";
+
 switch ($_GET["op"]) {
     case 'reporteHistorial':
         if($idcentro != ""){
@@ -16,8 +18,8 @@ switch ($_GET["op"]) {
             // //$dataCentro = $report->mostrarCentro($idcentro);
 
              $codigo = 'ATM-RG-MT-007';
-             $fecha = '30/12/2021';
-             $revision = '00';
+             $fecha = '31/03/2023';
+             $revision = '01';
              $titulo = 'HISTORIAL DE MANTENIMIENTO A EMBARCACIONES';
              $nombreCentro = $report->mostrarCentro($idcentro);
              $dataCentro = $report->dataCentro($idcentro);
@@ -74,4 +76,35 @@ switch ($_GET["op"]) {
         }
     break;
     
+    case 'controlInterno':
+        if($idcentro2 != ""){
+            require_once("fpdf/config2.php");
+
+            $codigo = 'ATM-RG-MT-002';
+            $fecha = '31/08/2022';
+            $revision = '06';
+            $titulo = 'PROGRAMA DE MANTENIMIENTO PREVENTIVO PARA EMBARCACIONES';
+            $nombreCentro = $report->mostrarCentro($idcentro2);
+            $dataAct = $report->mostrarAct($idcentro2);
+
+            $pdf = new PDF($codigo,$fecha,$revision,$titulo,$nombreCentro['nombre']);
+            $pdf->AddPage('L', 'Letter', 0);
+            $pdf->SetFillColor(198, 198, 247);
+
+            $pdf->tablaActividades($dataAct);
+
+            // /*NOMBRE ARCHIVO*/
+            $narchivo = 'RQ_'.round(microtime(true));
+            
+            $pdf->AliasNbPages();
+            $pdf->Output('F','../vistas/reportes/controlInterno/'.$narchivo.'.pdf',true);
+            $ruta = 'vistas/reportes/controlInterno/'.$narchivo.'.pdf';
+            echo $ruta;
+
+        } else {
+        echo "No se puede generar el reporte";
+        //SELECT T2.idact, T2.numact, T3.codigo, T3.fecha, T3.horas, T1.horasprox, T2.nombre FROM act_ods AS T1 LEFT JOIN act AS T2 ON T1.idact = T2.idact LEFT JOIN ods_mtto AS T3 ON T3.idods_mtto = T1.idods_mtto WHERE T3.idcentro = 5 AND T2.esplan = 2;
+        }
+    break;
+
 }

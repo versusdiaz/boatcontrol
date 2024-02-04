@@ -36,7 +36,7 @@
               <div class="card-body text-center">
                 <div>
                   <h2>BoatControl</h2>
-                  <p>Sistema elaborado para el control del mantenimiento de embarcaciones</p>
+                  <p>Sistema elaborado para el mantenimiento y gestion de embarcaciones</p>
                   <p>GRUPO DE TRANSPORTE ATM, C.A</p><p>ISO 9001:2015 Nº580065</p>
                 </div>
               </div>

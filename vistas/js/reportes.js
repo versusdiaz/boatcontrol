@@ -10,6 +10,12 @@ function init(){
         $("#idcentro").selectpicker('refresh');
         });
 
+        $.post("controllers/centro.php?op=listarc",function(respuesta){
+        $("#idcentro2").html(respuesta);
+        $("#idcentro2").selectpicker('refresh');
+        });
+
+
     mostrarform(false,0);
     
      $("#formulario1").on("submit",function(e){
@@ -28,7 +34,37 @@ function init(){
             success: function(respuesta){
               /*swal(respuesta, "Presione OK para continuar");*/
               swal({
-                title: "Reporte ProntoPago"
+                title: "Historial ATM-RG-MT-007"
+                , text: "Ha sido generado, continue para imprimir"
+                , type: "info"
+                , showCancelButton: true
+                , confirmButtonColor: "#da4f49"
+                , confirmButtonText: "Imprimir!"
+                , closeOnConfirm: true
+                }, function () {
+                    window.open(respuesta,"_blank");
+                });
+            }
+         });
+    });
+
+    $("#formulario2").on("submit",function(e){
+        e.preventDefault();
+        var formData = new FormData($("#formulario")[0]);
+        var idcentro2 = $("#idcentro2").val();
+
+        formData.append("idcentro2",idcentro2);
+
+         $.ajax({
+            url:"controllers/reportes.php?op=controlInterno",
+            type:"POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(respuesta){
+              /*swal(respuesta, "Presione OK para continuar");*/
+              swal({
+                title: "Programa de Mantenimiento Preventivo ATM-RG-MT-002"
                 , text: "Ha sido generado, continue para imprimir"
                 , type: "info"
                 , showCancelButton: true
@@ -38,39 +74,6 @@ function init(){
                 }, function () {
                     // window.open(respuesta,"_blank");
                     alert(respuesta);
-                });
-            }
-         });
-    });
-    
-    $("#formulario2").on("submit",function(e){
-        e.preventDefault();
-        var formData = new FormData($("#formulario2")[0]);
-        var empresa = $("#idempresa2").val();
-        var startDate = $("#fechaprepago2").data("daterangepicker").startDate.format('YYYY-MM-DD');
-        var endDate = $("#fechaprepago2").data("daterangepicker").endDate.format('YYYY-MM-DD');
-
-        formData.append("idempresa",empresa);
-        formData.append("startDate",startDate);
-        formData.append("endDate",endDate);
-         $.ajax({
-            url:"controllers/imprimiru.php?op=resumenProntoP",
-            type:"POST",
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function(respuesta){
-              /*swal(respuesta, "Presione OK para continuar");*/
-              swal({
-                title: "Resumen ProntoPago"
-                , text: "Ha sido generado, continue para imprimir"
-                , type: "info"
-                , showCancelButton: true
-                , confirmButtonColor: "#da4f49"
-                , confirmButtonText: "Imprimir!"
-                , closeOnConfirm: true
-                }, function () {
-                    window.open(respuesta,"_blank");
                 });
             }
          });
@@ -145,6 +148,7 @@ function init(){
 
 function limpiar(){
     $("#idcentro").selectpicker("val","");
+    $("#idcentro2").selectpicker("val","");
     /*QUITAR CLASES A LOS ELEMENTOS*/
     $(".form-group").removeClass('has-success has-error');
 }

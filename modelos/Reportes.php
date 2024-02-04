@@ -31,9 +31,9 @@ class Reportes{
         return ConsultaFila($sql);
     }
 
-    public static function mostrarPCS($idpcs){
-        $sql = "SELECT T1.codigo, T1.fecha, T2.nombre, T2.nfiscal, T2.direccion, T2.telefono FROM pcs AS T1 LEFT JOIN proveedores AS T2 ON T1.idproveedor = T2.idproveedor WHERE idpcs = $idpcs";
-        return ConsultaFila($sql);
+    public static function mostrarAct($idcentro){
+        $sql = "SELECT T2.idact, T2.numact, T3.codigo, T3.fecha, T3.horas, T1.horasprox, T2.nombre FROM act_ods AS T1 LEFT JOIN act AS T2 ON T1.idact = T2.idact LEFT JOIN ods_mtto AS T3 ON T3.idods_mtto = T1.idods_mtto WHERE T3.idcentro = $idcentro AND T2.esplan = 2";
+        return Consulta($sql);
     }
 
 }
