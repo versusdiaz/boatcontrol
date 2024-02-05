@@ -82,7 +82,7 @@ break;
         while($reg = $rspta->fetch_object()){
            $data[]=array(
                "0"=>'<button class="btn btn-warning" onclick="mostrar('.$reg->idods_mtto.')"><i class="nav-icon icon-pencil" style="color:white" ></i></button> <button class="btn btn-danger" onclick="eliminar('.$reg->idods_mtto.')"><i class="fa fa-trash"></i></button>'.
- 					' <button class="btn btn-primary" onclick="mostrarP('.$reg->idods_mtto.','.$reg->horas.')"><i class="fa fa-fire"></i></button> <button class="btn btn-success" onclick="confirmarP('.$reg->idods_mtto.')"><i class="fa fa fa-check"></i></button>',
+ 					' <button class="btn btn-primary" onclick="mostrarP('.$reg->idods_mtto.','.$reg->horas.')"><i class="fa fa-fire"></i></button> <button class="btn btn-success" onclick="confirmarP('.$reg->idods_mtto.','.$reg->idcentro.')"><i class="fa fa fa-check"></i></button>',
                "1"=>$reg->codigo,
                "2"=>$reg->nombre,
                "3"=>$reg->com_falla,
@@ -153,8 +153,43 @@ break;
     break;
 
     case 'confirmarP':
-        $rspta = $ods_mtto->updateR($idods_mtto);
-        echo $rspta ? "Orden Almacenada": "Orden no se puede almacenar";
+
+        if($idods_mtto){
+             // Consulto arreglo de las act de la ods que son preventivas 
+            $rspta2 = $ods_mtto->act_odsPreventivas($idods_mtto);
+            if ($rspta2 != null){
+                // Consulto ID del programa preventivo que voy a editar
+                $rspta3 = $ods_mtto->programaPreventivo($idcentro);
+                //Consulto el arreglo de las act Preventivas de ese programa.
+                $rspta4 = $ods_mtto->actProgramas($rspta3['idprogramas']);
+
+                // Hacer cambios al programaPreventivo debo usar rspta4 se supone que son mas.
+            //     while ($reg = $rspta3->fetch_object()){
+
+            //  }   
+            $x = 0;
+            foreach($rspta4 as $item){
+                foreach($rspta2 as $item2){
+                    if($item['idact'] === $item2['idact'] ){
+                        echo $item['horasrealizadas'];
+                    }
+
+                }
+            }
+            
+
+                //$rspta = $ods_mtto->updateR($idods_mtto);
+                // echo $rspta ? "Orden Almacenada": "Orden no se puede almacenar";
+
+            } else {
+                // No hay act preventivas si cae en este else
+            }
+
+        } else {
+           echo $rspta = 'Error al registra la Orden falta ID'; 
+        }
+
+        
     break;        
 
 }

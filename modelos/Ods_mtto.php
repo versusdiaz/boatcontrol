@@ -8,9 +8,9 @@ class Ods_mtto{
     public static function insertar($idcentro,$codigo,$com_general,$com_estado,$com_falla,$horas,$tipo,$sistema,$tiempo_ino,$tiempo_mtto,$costo,$afectaservicio,$fecha){
         $sql = "INSERT INTO ods_mtto (idcentro,codigo,com_general,com_estado,com_falla,horas,tipo,sistema,tiempo_ino,tiempo_mtto,costo,afectaservicio,fecha,condicion) VALUES ('$idcentro','$codigo','$com_general','$com_estado','$com_falla','$horas','$tipo','$sistema'
         ,'$tiempo_ino','$tiempo_mtto','$costo','$afectaservicio','$fecha',1)";
-        $sw = true;
-        Consulta($sql) or $sw = false;
-        return $sw;
+       $sw = true;
+       Consulta($sql) or $sw = false;
+       return $sw;
     }
     
     public static function editar($idods_mtto,$idcentro,$codigo,$com_general,$com_estado,$com_falla,$horas,$tipo,$sistema,$tiempo_ino,$tiempo_mtto,$costo,$afectaservicio,$fecha){
@@ -29,6 +29,21 @@ class Ods_mtto{
         $sql = "DELETE FROM ods_mtto WHERE idods_mtto='$idods_mtto'";
         return Consulta($sql);
     }
+
+    public static function act_odsPreventivas($idods_mtto){
+        $sql = "SELECT T1.idact_ods,T1.idact,T1.idods_mtto, T2.esplan FROM act_ods AS T1 LEFT JOIN act AS T2 ON T1.idact = T2.idact WHERE idods_mtto='$idods_mtto' AND T2.esplan = 2";   
+        return Consulta($sql);
+    }
+
+    public static function programaPreventivo($idcentro){
+        $sql = "SELECT idprogramas FROM programas WHERE idcentro='$idcentro' AND condicion = 1";
+        return ConsultaFila($sql); 
+    }
+
+    public static function actProgramas($idprogramas){
+        $sql = "SELECT * FROM act_programas WHERE idprogramas='$idprogramas'";
+        return Consulta($sql); 
+    }
     
     public static function activar($idrequest_temp){
         $sql = "UPDATE request_temp SET condicion='1' WHERE idrequest_temp='$idrequest_temp'";
@@ -41,7 +56,7 @@ class Ods_mtto{
     }
     
     public static function listar(){
-        $sql = "SELECT T1.idods_mtto, T1.codigo, T2.nombre, T1.com_falla, T1.fecha, T1.horas FROM ods_mtto AS T1 LEFT JOIN centro AS T2 ON T1.idcentro = T2.idcentro WHERE T1.condicion = 1"; 
+        $sql = "SELECT T1.idods_mtto, T1.codigo, T2.nombre, T1.com_falla, T1.fecha, T1.horas, T1.idcentro FROM ods_mtto AS T1 LEFT JOIN centro AS T2 ON T1.idcentro = T2.idcentro WHERE T1.condicion = 1"; 
         return Consulta($sql);
     }
 

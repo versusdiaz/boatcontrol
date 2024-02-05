@@ -8,6 +8,7 @@ class EnlacesModels{
            $enlaces == "reportes" ||
            $enlaces == "ods_list" ||
            $enlaces == "ods_mtto" ||
+           $enlaces == "programas" ||
            $enlaces == "actividades" ||
            $enlaces == "escritorio" ){
             /* MODULO A CARGAR SERA */

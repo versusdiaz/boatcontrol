@@ -363,7 +363,7 @@ function mostrarP(idrequest_temp,horas){
         });
  }
 
- function confirmarP(idods_mtto){
+ function confirmarP(idods_mtto,idcentro){
     swal({
         title: "Esta seguro..?"
         , text: "Al procesar esta orden, sera almacenada"
@@ -373,7 +373,7 @@ function mostrarP(idrequest_temp,horas){
         , confirmButtonText: "Si, procesarla !"
         , closeOnConfirm: false
         }, function () {
-            $.post('controllers/ods_mtto.php?op=confirmarP',{idods_mtto:idods_mtto},function(e){
+            $.post('controllers/ods_mtto.php?op=confirmarP',{idods_mtto:idods_mtto,centro:idcentro},function(e){
             swal(e, "Presione OK para continuar");
             tabla.ajax.reload();
             mostrarformP(false);            

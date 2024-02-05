@@ -35,6 +35,10 @@
                   <a class="nav-link" href="centro">
                     <i class="nav-icon icon-support"></i> Embarcaciones</a>
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="programas">
+                    <i class="nav-icon icon-wrench"></i> Programas</a>
+                </li>
               </ul>
             </li>
             <li class="nav-item nav-dropdown">
