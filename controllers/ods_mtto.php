@@ -162,31 +162,30 @@ break;
                 $rspta3 = $ods_mtto->programaPreventivo($idcentro);
                 //Consulto el arreglo de las act Preventivas de ese programa.
                 $rspta4 = $ods_mtto->actProgramas($rspta3['idprogramas']);
-
-                // Hacer cambios al programaPreventivo debo usar rspta4 se supone que son mas.
-            //     while ($reg = $rspta3->fetch_object()){
-
-            //  }   
-            $x = 0;
+                // Dame las horas de la ODS.
+                $horasactuales = $ods_mtto->consultaHoras($idods_mtto);
+ 
             foreach($rspta4 as $item){
                 foreach($rspta2 as $item2){
                     if($item['idact'] === $item2['idact'] ){
-                        echo $item['horasrealizadas'];
+                        // Ahora calcula las horas donde se realizaron
+                        $horasRealizadas = $horasactuales['horas'];
+                        // Inserto las horas 
+                        $ods_mtto->insertarHorasRealizadas($horasRealizadas,$item['idact_programas']);
                     }
-
                 }
             }
             
-
-                //$rspta = $ods_mtto->updateR($idods_mtto);
-                // echo $rspta ? "Orden Almacenada": "Orden no se puede almacenar";
+            $rspta = $ods_mtto->updateR($idods_mtto);
+            echo $rspta ? "Orden Almacenada": "Orden no se puede almacenar";
 
             } else {
-                // No hay act preventivas si cae en este else
+                $rspta = $ods_mtto->updateR($idods_mtto);
+                echo $rspta ? "Orden Almacenada": "Orden no se puede almacenar";
             }
 
         } else {
-           echo $rspta = 'Error al registra la Orden falta ID'; 
+           echo $rspta = 'Error al registrar la Orden falta ID'; 
         }
 
         

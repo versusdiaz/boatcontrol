@@ -78,6 +78,10 @@ switch ($_GET["op"]){
     case 'desactivar':
       $rspta = $programas->desactivar($idprogramas);
       echo $rspta ? "Programa guardado": "El programa no se puede guardar";
+    // Debo revisar las actividades ejecutas y las pendientes y crear un nuevo programa.
+    // debo sacar la fecha que cierra y pedir la nueva.
+    // debo cambiar la condicion de las actividades pendientes a cerradas
+
     break;
 
     case 'activar':

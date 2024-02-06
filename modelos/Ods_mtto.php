@@ -35,6 +35,7 @@ class Ods_mtto{
         return Consulta($sql);
     }
 
+
     public static function programaPreventivo($idcentro){
         $sql = "SELECT idprogramas FROM programas WHERE idcentro='$idcentro' AND condicion = 1";
         return ConsultaFila($sql); 
@@ -43,6 +44,23 @@ class Ods_mtto{
     public static function actProgramas($idprogramas){
         $sql = "SELECT * FROM act_programas WHERE idprogramas='$idprogramas'";
         return Consulta($sql); 
+    }
+
+    public static function consultaHoras($idods_mtto){
+        $sql = "SELECT horas FROM ods_mtto WHERE idods_mtto='$idods_mtto'";
+        return ConsultaFila($sql);
+    }
+
+    public static function consultaIntervalos($idact){
+        $sql = "SELECT horas FROM act WHERE idact='$idact'";
+        return ConsultaFila($sql);
+    }
+
+    public static function insertarHorasRealizadas($horasRealizadas,$idact_programas){
+        $sql = "UPDATE act_programas SET horasrealizadas = '$horasRealizadas', condicion = 2 WHERE idact_programas = '$idact_programas'";
+        $sw = true;
+        Consulta($sql) or $sw = false;
+        return $sw;
     }
     
     public static function activar($idrequest_temp){
@@ -137,5 +155,6 @@ class Ods_mtto{
         $sql = "UPDATE $dpto SET codigo = '$codigo', idproveedor = '$idproveedor' WHERE idrequest_temp = '$idrequest_temp'";
         return Consulta($sql);
     }
+
 
 }
