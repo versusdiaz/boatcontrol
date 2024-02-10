@@ -171,7 +171,7 @@ swal({
     });
  }
 
- function desactivar(idprogramas){
+ function desactivar(idprogramas,idcentro){
     swal({
         title: "Esta seguro..?"
         , text: "Al guardar este programa la informacion no estara disponible para editar"
@@ -181,7 +181,7 @@ swal({
         , confirmButtonText: "Si, deseo Guardarlo!"
         , closeOnConfirm: false
         }, function () {
-            $.post('controllers/programas.php?op=desactivar',{idprogramas:idprogramas},function(e){
+            $.post('controllers/programas.php?op=desactivar',{idprogramas:idprogramas,centro:idcentro},function(e){
             swal("Guardado!", e , "success");  
             tabla.ajax.reload();
             });

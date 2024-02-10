@@ -79,7 +79,7 @@
                                 </div>
 
                                 <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                    <label class="col-sm-12 control-label">Situacion Encontrada:</label>
+                                    <label class="col-sm-12 control-label">Diagnostico de Equipo:</label>
                                     <div class="col-sm-12">
                                         <input type="text" class="form-control" name="com_estado" id="com_estado">
                                     </div>

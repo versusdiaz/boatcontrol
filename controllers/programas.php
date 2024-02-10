@@ -52,7 +52,7 @@ switch ($_GET["op"]){
         while($reg = $rspta->fetch_object()){
            $data[]=array(
                "0"=>($reg->condicion)?'<button class="btn btn-warning" onclick="mostrar('.$reg->idprogramas.')"><i class="nav-icon icon-pencil" style="color:white" ></i></button> <button class="btn btn-danger" onclick="eliminar('.$reg->idprogramas.')"><i class="fa fa-trash"></i></button>'.
- 					' <button class="btn btn-success" onclick="desactivar('.$reg->idprogramas.')"><i class="fa fa-lock"></i></button>':'<button class="btn btn-warning" onclick="mostrar('.$reg->idprogramas.')"><i class="nav-icon icon-pencil"  style="color:white" ></i></button> <button class="btn btn-danger" onclick="eliminar('.$reg->idprogramas.')"><i class="fa fa-trash"></i></button>'.
+ 					' <button class="btn btn-success" onclick="desactivar('.$reg->idprogramas.','.$reg->idcentro.')"><i class="fa fa-lock"></i></button>':'<button class="btn btn-warning" onclick="mostrar('.$reg->idprogramas.')"><i class="nav-icon icon-pencil"  style="color:white" ></i></button> <button class="btn btn-danger" onclick="eliminar('.$reg->idprogramas.')"><i class="fa fa-trash"></i></button>'.
  					' <button class="btn btn-primary" onclick="activar('.$reg->idprogramas.')"><i class="fa fa-check"></i></button>',
                "1"=>$reg->nombre,
                "2"=>$reg->fechainicio,
@@ -76,11 +76,33 @@ switch ($_GET["op"]){
     break;
 
     case 'desactivar':
+
+     // Debo buscar las horas actuales de la embarcacion para iniciar el programa nuevo, lo buscare dentro de todas las ODS.
+       $horasActuales = $programas->horasActuales($idcentro);
+       $fecha = date("Y-m-d");
+       //Ahora creo un nuevo programa e inserto las actividades nuevas.
+       $idNuevoPrograma=$programas->insertarID($idcentro, $horasActuales['horas'], $fecha);
+
+       // Reviso las actividades ejecutadas.
+       $rpsta2 = $programas->actProgramadas($idprogramas); 
+       $item = array();
+
+       // Recorro el arreglo de las actividades ejecutadas y creo las nuevas horoas
+
+       foreach ($rpsta2 as $item) {
+        if($item['condicion'] > 1 ){
+            // Sumo las horas realizadas con las horas de la actividad ojo es el mismo arreglo
+            $item ['horasrealizadas'] = $item['horasrealizadas'] + $item['horas'];
+        } else {
+            $item['horasrealizadas'] = $item['horasplan'];
+        }
+        $programas->insertarAct($item['idact'],$idNuevoPrograma,$item['horasrealizadas']);
+       }
+
+        // DESACTIVO EL PROGRAMA VIEJO Y LO DOY POR CERRADO
       $rspta = $programas->desactivar($idprogramas);
       echo $rspta ? "Programa guardado": "El programa no se puede guardar";
-    // Debo revisar las actividades ejecutas y las pendientes y crear un nuevo programa.
-    // debo sacar la fecha que cierra y pedir la nueva.
-    // debo cambiar la condicion de las actividades pendientes a cerradas
+
 
     break;
 

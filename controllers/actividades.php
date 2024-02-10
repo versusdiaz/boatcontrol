@@ -52,7 +52,7 @@ switch ($_GET["op"]){
         while($reg = $rspta->fetch_object()){
            $data[]=array(
                "0"=>($reg->condicion)?'<button class="btn btn-warning" onclick="mostrar('.$reg->idact.')"><i class="nav-icon icon-pencil" style="color:white" ></i></button> <button class="btn btn-danger" onclick="eliminar('.$reg->idact.')"><i class="fa fa-trash"></i></button>'.
- 					' <button class="btn btn-danger" onclick="desactivar('.$reg->idact.')"><i class="fa fa-times"></i></button>':'<button class="btn btn-warning" onclick="mostrar('.$reg->idact.')"><i class="nav-icon icon-pencil"  style="color:white" ></i></button> <button class="btn btn-danger" onclick="eliminar('.$reg->idact.')"><i class="fa fa-trash"></i></button>'.
+ 					' <button class="btn btn-secondary" onclick="desactivar('.$reg->idact.')"><i class="fa fa-times"></i></button>':'<button class="btn btn-warning" onclick="mostrar('.$reg->idact.')"><i class="nav-icon icon-pencil"  style="color:white" ></i></button> <button class="btn btn-danger" onclick="eliminar('.$reg->idact.')"><i class="fa fa-trash"></i></button>'.
  					' <button class="btn btn-primary" onclick="activar('.$reg->idact.')"><i class="fa fa-check"></i></button>',
                "1"=>$reg->nombre,
                "2"=>$reg->numact,

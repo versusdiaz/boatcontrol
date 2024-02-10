@@ -68,4 +68,15 @@ class Programas{
         Consulta($sql) or $sw = false;
         return $sql;
     }
+
+    public static function actProgramadas($idprogramas){
+        $sql = "SELECT T1.idact, T1.horasplan, T1.horasrealizadas, T2.horas, T1.condicion FROM act_programas AS T1 LEFT JOIN act AS T2 ON T1.idact = T2.idact WHERE T1.idprogramas = '$idprogramas'";
+        return Consulta($sql);
+    }
+
+    public static function horasActuales($idcentro){
+        $sql = "SELECT horas FROM ods_mtto WHERE idcentro = '$idcentro' ORDER BY horas DESC LIMIT 1;";
+        return ConsultaFila($sql);
+    }
+
 }
