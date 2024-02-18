@@ -2,6 +2,7 @@ var tabla;
 var bandera;
 function init(){
     mostrarform(false);
+    mostrarform2(false);
     listar();
 
 
@@ -90,10 +91,27 @@ function mostrarform(flag){
     }
 }
 
+function mostrarform2(flag){
+    limpiar();
+    if(flag){
+        $("#listadoregistros").hide();
+        $("#formulario2").show('fast');
+        $("#btnGuardar").prop("disabled",false);
+        $("#btnRegresar").prop("disabled",false);
+        $("#btnagregar").hide();
+    } else {
+        $("#listadoregistros").show();
+        $("#formulario2").hide();
+        $("#btnRegresar").show();
+    }
+}
+
 function cancelarform(){
     mostrarform(false);
+    mostrarform2(false);
     limpiar();
 }
+
 
 function listar(){
     tabla=$('#tbllistado').dataTable(
@@ -152,6 +170,21 @@ function mostrar(idprogramas){
        $("#centro").selectpicker("refresh");
 
     });
+   }
+
+   function mostrarPlan(idprogramas){
+    $.post("controllers/programas.php?op=mostrarPlan",{idprogramas:idprogramas},function(data,status){
+         /*Convertir la cadena enviada desde PHP a un vector de objetos en JavaScript */
+        data = JSON.parse(data);
+        mostrarform2(true);
+        let texto = "";
+
+        for (let clave in data) {
+            texto += data[clave] + "\n";
+          }
+        $("#pendientes").val(texto);
+
+    }); 
    }
 
 function eliminar(idcentro){

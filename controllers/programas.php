@@ -51,8 +51,8 @@ switch ($_GET["op"]){
         $data = Array();
         while($reg = $rspta->fetch_object()){
            $data[]=array(
-               "0"=>($reg->condicion)?'<button class="btn btn-warning" onclick="mostrar('.$reg->idprogramas.')"><i class="nav-icon icon-pencil" style="color:white" ></i></button> <button class="btn btn-danger" onclick="eliminar('.$reg->idprogramas.')"><i class="fa fa-trash"></i></button>'.
- 					' <button class="btn btn-success" onclick="desactivar('.$reg->idprogramas.','.$reg->idcentro.')"><i class="fa fa-lock"></i></button>':'<button class="btn btn-warning" onclick="mostrar('.$reg->idprogramas.')"><i class="nav-icon icon-pencil"  style="color:white" ></i></button> <button class="btn btn-danger" onclick="eliminar('.$reg->idprogramas.')"><i class="fa fa-trash"></i></button>'.
+               "0"=>($reg->condicion)?'<button class="btn btn-warning" onclick="mostrar('.$reg->idprogramas.')"><i class="nav-icon icon-pencil" style="color:white" ></i></button> <button class="btn btn-primary" onclick="mostrarPlan('.$reg->idprogramas.')"><i class="nav-icon icon-calendar" style="color:white" ></i></button> <button class="btn btn-danger" onclick="eliminar('.$reg->idprogramas.')"><i class="fa fa-trash"></i></button>'.
+ 					' <button class="btn btn-success" onclick="desactivar('.$reg->idprogramas.','.$reg->idcentro.')"><i class="fa fa-lock"></i></button>':'<button class="btn btn-warning" onclick="mostrar('.$reg->idprogramas.')"><i class="nav-icon icon-pencil"  style="color:white" ></i></button> <button class="btn btn-primary" onclick="mostrarPlan('.$reg->idprogramas.')"><i class="nav-icon icon-calendar" style="color:white" ></i></button> <button class="btn btn-danger" onclick="eliminar('.$reg->idprogramas.')"><i class="fa fa-trash"></i></button>'.
  					' <button class="btn btn-primary" onclick="activar('.$reg->idprogramas.')"><i class="fa fa-check"></i></button>',
                "1"=>$reg->nombre,
                "2"=>$reg->fechainicio,
@@ -74,6 +74,22 @@ switch ($_GET["op"]){
         $rspta = $programas->mostrar($idprogramas);
         echo json_encode($rspta);
     break;
+
+    case 'mostrarPlan':
+        /*ID USUARIO SE ENVIA POR POST ESTA DECLARADO EN LA INICIALIACION*/
+        $rspta = $programas->mostrarPlan($idprogramas);
+        $data = Array();
+        while($reg = $rspta->fetch_object()){
+           $data[]=array(
+               "0"=>"Actividad: ".$reg->nombre." \n ",
+               "1"=>"Horas Planificadas: ".$reg->horasplan." \n ",
+               "2"=>($reg->horasrealizadas == 0 ? "Horas Ejecutadas: Pendientes  \n" : "Horas Ejecutadas: ".$reg->horasrealizadas." \n "),
+               "3"=>$resultado = ($reg->condicion == 1 ? 'Status: Pendiente' : ($reg->condicion == 2 ? 'Status: Ejecutado' : 'Otro resultado'))
+           );
+        }
+        echo json_encode($data);
+    break;
+
 
     case 'desactivar':
 

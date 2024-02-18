@@ -79,4 +79,9 @@ class Programas{
         return ConsultaFila($sql);
     }
 
+    public static function mostrarPlan($idprogramas){
+        $sql = "SELECT T1.idact, T2.nombre, T1.horasplan, T1.horasrealizadas, T1.condicion FROM act_programas AS T1 LEFT JOIN act AS T2 ON T1.idact = T2.idact WHERE idprogramas = '$idprogramas'";
+        return Consulta($sql);
+    }
+
 }

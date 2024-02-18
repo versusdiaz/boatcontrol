@@ -51,10 +51,10 @@
                         <div class="card-body" id="formularioregistros">
                         <form name="formulario" id="formulario" method="POST">
                             <div class="row">
-                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <label class="col-sm-12 control-label">Programa *:</label>
-                        <input type="hidden" name="idprogramas" id="idprogramas">
-                        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <label class="col-sm-12 control-label">Programa *:</label>
+                                        <input type="hidden" name="idprogramas" id="idprogramas">
+                            <div class="form-group col-lg-12 col-md-6 col-sm-6 col-xs-6">
                                     <label class="col-sm-12 control-label">Embarcacion *:</label>
                                     <div class="col-sm-12">
                                         <select class="form-control selectpicker" data-live-search="true" name="centro" id="centro">
@@ -62,28 +62,48 @@
                                         </select>
                                     </div>
                         </div>
-                        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group col-lg-12 col-md-6 col-sm-6 col-xs-6">
                                     <label class="col-sm-12 control-label">Horas de Inicio *:</label>
                                     <div class="col-sm-12">
                                         <input type="number" class="form-control" name="horasinicio" id="horasinicio">
                                     </div>
                                 </div>
-                         <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                         <div class="form-group col-lg-12 col-md-6 col-sm-6 col-xs-6">
                                     <label class="col-sm-12 control-label">Fecha *:</label>
                                     <div class="col-sm-12">
                                         <input type="date" class="form-control" name="fechainicio" id="fechainicio" required>
                                     </div>
-                                </div>
+                        </div>
+
 
                         <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <button class="btn btn-primary" type="submit" id="btnGuardar">
+                            <button class="btn btn-primary" type="submit" id="btnGuardar">
                             <i class="fa fa-save"></i> Guardar</button>
-                        <button class="btn btn-danger" type="button" onclick="cancelarform()">
+                            <button class="btn btn-danger" type="button" onclick="cancelarform()">
                             <i class="fa fa-arrow-circle-left"></i> Cancelar</button>
                         </div>
                         </div>
                         </form>
-                            </div>
+                        </div>
+
+                        <div class="card-body" id="formularioregistros">
+                        <form name="formulario" id="formulario2" method="POST">
+                            <div class="row">
+
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <label class="col-sm-12 control-label">Actividades Programadas *:</label>
+                                    <div class="col-sm-12">
+                                        <textarea class="form-control" name="pendientes" rows="10" cols="50" id="pendientes"  ></textarea>
+                                    </div>
+                        </div>
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <button class="btn btn-danger" type="button" id="btnRegresar" onclick="cancelarform()">
+                            <i class="fa fa-arrow-circle-left"></i> Regresar</button>
+                        </div>
+                        </div>
+                        </form>
+                        </div>
+
                         </div>
                     </div>
                 </div>
