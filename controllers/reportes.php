@@ -80,11 +80,13 @@ switch ($_GET["op"]) {
         if($idcentro2 != ""){
             require_once("fpdf/config2.php");
 
-            $codigo = 'ATM-RG-MT-002';
-            $fecha = '31/08/2022';
-            $revision = '06';
-            $titulo = 'PROGRAMA DE MANTENIMIENTO PREVENTIVO PARA EMBARCACIONES';
+            $codigo = 'ATM-RG-MT-009';
+            $fecha = '01/01/2024';
+            $revision = '00';
+            $titulo = 'SEGUIMIENDO Y CONTROL DEL PROGRAMA DE MANTENIMIENTO PREVENTIVO PARA EMBARCACIONES';
+            // Pido los datos de la embarcacion
             $nombreCentro = $report->mostrarCentro($idcentro2);
+            
             $dataAct = $report->mostrarAct($idcentro2);
 
             $pdf = new PDF($codigo,$fecha,$revision,$titulo,$nombreCentro['nombre']);

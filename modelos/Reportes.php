@@ -32,7 +32,7 @@ class Reportes{
     }
 
     public static function mostrarAct($idcentro){
-        $sql = "SELECT T2.idact, T2.numact, T3.codigo, T3.fecha, T3.horas, T1.horasprox, T2.nombre FROM act_ods AS T1 LEFT JOIN act AS T2 ON T1.idact = T2.idact LEFT JOIN ods_mtto AS T3 ON T3.idods_mtto = T1.idods_mtto WHERE T3.idcentro = $idcentro AND T2.esplan = 2";
+        $sql = "SELECT T2.nombre, T1.horasplan, T1.horasrealizadas, T3.codigo, T3.fecha, T4.fechainicio FROM act_programas AS T1 LEFT JOIN act AS T2 ON T1.idact = T2.idact LEFT JOIN ods_mtto AS T3 ON T3.idods_mtto = T1.idods_mtto LEFT JOIN programas AS T4 ON T4.idprogramas = T1.idprogramas WHERE T4.idcentro = $idcentro";
         return Consulta($sql);
     }
 

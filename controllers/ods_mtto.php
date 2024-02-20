@@ -171,7 +171,7 @@ break;
                         // Ahora calcula las horas donde se realizaron
                         $horasRealizadas = $horasactuales['horas'];
                         // Inserto las horas 
-                        $ods_mtto->insertarHorasRealizadas($horasRealizadas,$item['idact_programas']);
+                        $ods_mtto->insertarHorasRealizadas($horasRealizadas,$item['idact_programas'],$idods_mtto);
                     }
                 }
             }

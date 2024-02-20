@@ -56,8 +56,8 @@ class Ods_mtto{
         return ConsultaFila($sql);
     }
 
-    public static function insertarHorasRealizadas($horasRealizadas,$idact_programas){
-        $sql = "UPDATE act_programas SET horasrealizadas = '$horasRealizadas', condicion = 2 WHERE idact_programas = '$idact_programas'";
+    public static function insertarHorasRealizadas($horasRealizadas,$idact_programas,$idods_mtto){
+        $sql = "UPDATE act_programas SET horasrealizadas = '$horasRealizadas', idods_mtto = '$idods_mtto', condicion = 2 WHERE idact_programas = '$idact_programas'";
         $sw = true;
         Consulta($sql) or $sw = false;
         return $sw;

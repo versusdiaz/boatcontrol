@@ -64,7 +64,7 @@ function init(){
             success: function(respuesta){
               /*swal(respuesta, "Presione OK para continuar");*/
               swal({
-                title: "Programa de Mantenimiento Preventivo ATM-RG-MT-002"
+                title: "Control del Programa de Mantenimiento Preventivo ATM-RG-MT-002"
                 , text: "Ha sido generado, continue para imprimir"
                 , type: "info"
                 , showCancelButton: true

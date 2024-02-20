@@ -47,9 +47,9 @@
                                 <button type="button" class="btn btn-social btn-block btn-lg btn-github" onclick="mostrarform(true,2)">
                                     <i class="fa fa-paypal"></i>Programas de Mtto. Preventivo</button>
                                 <button type="button" class="btn btn-social btn-block btn-lg btn-github" onclick="mostrarform(true,3)">
-                                    <i class="fa fa-paypal"></i>Resumen Pronto-Pago</button>
+                                    <i class="fa fa-paypal"></i>Opcion Disponible</button>
                                 <button type="button" class="btn btn-social btn-block btn-lg btn-github" onclick="mostrarform(true,4)">
-                                    <i class="fa fa-paypal"></i>Servicios por Clientes</button>
+                                    <i class="fa fa-paypal"></i>Opcion Disponible</button>
                             </div>
                         </div>
                     </div>
@@ -109,7 +109,7 @@
                         <div class="box box-primary reportes" id="cuadro3">
                             <div class="box-header" style="padding-bottom:0px">
                                 <i class="fa fa-print"></i>
-                                <h3 class="box-title">Resumen Pronto-Pago</h3>
+                                <h3 class="box-title">Opcion Disponible</h3>
                             </div>
                             <div class="panel-body" id="formularioregistros">
                                 <form name="formulario" id="formulario2" method="POST">
@@ -140,7 +140,7 @@
                         <div class="box box-primary reportes" id="cuadro4">
                             <div class="box-header" style="padding-bottom:0px">
                                 <i class="fa fa-print"></i>
-                                <h3 class="box-title">Servicios por Cliente</h3>
+                                <h3 class="box-title">Opcion Disponible</h3>
                             </div>
                             <div class="panel-body" id="formularioregistros">
                                 <form name="formulario4" id="formulario4" method="POST">

@@ -211,20 +211,20 @@
                  // Data
                 foreach($data as $row)
                 {
-                    // Rangos de validacion fecha para 2023
+                    // Rangos de validacion fecha para 2024
 
-                    $validarFechaEnero = $this->check_fecha('2023-01-01','2023-01-31',$row['fecha']);
-                    $validarFechaFebrero = $this->check_fecha('2023-02-01','2023-02-31',$row['fecha']);
-                    $validarFechaMarzo = $this->check_fecha('2023-03-01','2023-03-31',$row['fecha']);
-                    $validarFechaAbril = $this->check_fecha('2023-04-01','2023-04-31',$row['fecha']);
-                    $validarFechaMayo = $this->check_fecha('2023-05-01','2023-05-31',$row['fecha']);
-                    $validarFechaJunio = $this->check_fecha('2023-06-01','2023-06-31',$row['fecha']);
-                    $validarFechaJulio = $this->check_fecha('2023-07-01','2023-07-31',$row['fecha']);
-                    $validarFechaAgosto = $this->check_fecha('2023-08-01','2023-08-31',$row['fecha']);
-                    $validarFechaSeptiembre = $this->check_fecha('2023-09-01','2023-09-31',$row['fecha']);
-                    $validarFechaOctubre = $this->check_fecha('2023-10-01','2023-10-31',$row['fecha']);
-                    $validarFechaNoviembre = $this->check_fecha('2023-11-01','2023-11-31',$row['fecha']);
-                    $validarFechaDiciembre = $this->check_fecha('2023-12-01','2023-12-31',$row['fecha']);
+                    $validarFechaEnero = $this->check_fecha('2024-01-01','2024-01-31',$row['fecha']);
+                    $validarFechaFebrero = $this->check_fecha('2024-02-01','2024-02-31',$row['fecha']);
+                    $validarFechaMarzo = $this->check_fecha('2024-03-01','2024-03-31',$row['fecha']);
+                    $validarFechaAbril = $this->check_fecha('2024-04-01','2024-04-31',$row['fecha']);
+                    $validarFechaMayo = $this->check_fecha('2024-05-01','2024-05-31',$row['fecha']);
+                    $validarFechaJunio = $this->check_fecha('2024-06-01','2024-06-31',$row['fecha']);
+                    $validarFechaJulio = $this->check_fecha('2024-07-01','2024-07-31',$row['fecha']);
+                    $validarFechaAgosto = $this->check_fecha('2024-08-01','2024-08-31',$row['fecha']);
+                    $validarFechaSeptiembre = $this->check_fecha('2024-09-01','2024-09-31',$row['fecha']);
+                    $validarFechaOctubre = $this->check_fecha('2024-10-01','2024-10-31',$row['fecha']);
+                    $validarFechaNoviembre = $this->check_fecha('2024-11-01','2024-11-31',$row['fecha']);
+                    $validarFechaDiciembre = $this->check_fecha('2024-12-01','2024-12-31',$row['fecha']);
 
 
                     if($validarFechaEnero == true ){
