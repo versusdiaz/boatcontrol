@@ -72,8 +72,8 @@ function init(){
                 , confirmButtonText: "Imprimir!"
                 , closeOnConfirm: true
                 }, function () {
-                    // window.open(respuesta,"_blank");
-                    alert(respuesta);
+                    window.open(respuesta,"_blank");
+
                 });
             }
          });

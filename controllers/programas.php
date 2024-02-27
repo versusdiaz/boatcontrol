@@ -110,6 +110,7 @@ switch ($_GET["op"]){
             // Sumo las horas realizadas con las horas de la actividad ojo es el mismo arreglo
             $item ['horasrealizadas'] = $item['horasrealizadas'] + $item['horas'];
         } else {
+            // Validar que haya alcanzado las horas.
             $item['horasrealizadas'] = $item['horasplan'];
         }
         $programas->insertarAct($item['idact'],$idNuevoPrograma,$item['horasrealizadas']);

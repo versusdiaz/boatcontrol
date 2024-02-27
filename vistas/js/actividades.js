@@ -5,7 +5,7 @@ function init(){
     listar();
     
     jQuery.validator.addMethod("nombre", function(value, element){
-        if (/^[-_\w\.\s]*$/i.test(value)) {
+        if (/^[-_\w\.\s,()]*$/i.test(value)) {
             return true;  // FAIL validation when REGEX matches
         } else {
             return false;   // PASS validation otherwise

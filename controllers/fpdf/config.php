@@ -1,4 +1,6 @@
 <?php
+            
+            
             /*CONST DE LA TABLA*/
             class PDF extends FPDF{
             
@@ -7,8 +9,9 @@
             private $revision = '';
             private $titulo = '';
             private $nombre = '';
+            private $tag = '';
 
-            function __construct($codigo,$fecha,$revision,$titulo,$nombre){
+            function __construct($codigo,$fecha,$revision,$titulo,$nombre,$tag){
                 parent::__construct();
 
                 $this->codigo = $codigo;
@@ -16,6 +19,7 @@
                 $this->titulo = $titulo;
                 $this->revision = $revision;
                 $this->nombre = $nombre;
+                $this->tag = $tag;
 
             }
 
@@ -52,18 +56,18 @@
     
                 $this->SetXY(45,18);
                 $this->SetFont('Arial','',14);
-                $this->Cell(220,20, utf8_decode("SISTEMA DE GESTIÓN DE LA CALIDAD           "), 1, 0, 'C');
+                $this->Cell(220,20, utf8_decode("SISTEMA DE GESTIÓN DE LA CALIDAD                           "), 1, 0, 'C');
     
                 $this->SetXY(229,18);
                 $this->SetFont('Arial','',8);
-                $this->Cell(16,5,'CODIGO:', 1, 0, 'C',true);
+                $this->Cell(16,5,'CODIGO', 1, 0, 'C',true);
                 $this->SetXY(245,18);
                 $this->SetFont('Arial','',6);
                 $this->Cell(20,5, $this->codigo , 1, 0, 'C');
                     
                 $this->SetXY(229,23);
                 $this->SetFont('Arial','',8);
-                $this->Cell(16,5,'FECHA:', 1, 0, 'C',true);
+                $this->Cell(16,5,'FECHA', 1, 0, 'C',true);
                 $this->SetXY(245,23);
                 $this->SetFont('Arial','',6);
                 $this->Cell(20,5, $this->fecha, 1, 0, 'C');
@@ -93,18 +97,27 @@
                 $this->SetXY(45,42);
                 $this->Cell(91,5, utf8_decode($this->nombre), 'LRT', 0, 'C');
 
-                $this->SetFont('Arial','B',6);
                 $this->SetXY(136,42);
-                $this ->MultiCell(20,5,'AFECTA EJECUCION DEL SERVICIO', 'LRTB', 'C', 0);
+                $this->Cell(60,5, 'MATRICULA O SERIAL', 'LRT', 0, 'C', true);
 
-                $this->SetXY(156,42);
-                $this->Cell(68,15,'MANTENIMIENTO REALIZADO', 'LRTB', 0, 'C',true);
+                $this->SetXY(196,42);
+                $this->Cell(69,5, utf8_decode($this->tag) , 'LRT', 0, 'C');
 
-                $this->SetXY(224,42);
-                $this ->MultiCell(21,5,'TIEMPO DE MANTENIMIENTO (HRS)', 'LRTB', 'C', true);
+                $this->SetFont('Arial','B',6);
+                $this->SetXY(136,47);
+                $this ->MultiCell(20,3.4,'AFECTA EJECUCION DEL SERVICIO', 'LRTB', 'C', true);
 
-                $this->SetXY(245,42);
-                $this ->MultiCell(20,5,'TIEMPO INOPERATIVO (HRS)', 'LRTB', 'C', true);
+                $this->SetXY(156,47);
+                $this->Cell(55,10,'MANTENIMIENTO REALIZADO', 'LRTB', 0, 'C',true);
+
+                $this->SetXY(211,47);
+                $this->Cell(13,10,'COSTO', 'LRTB', 0, 'C',true);
+
+                $this->SetXY(224,47);
+                $this ->MultiCell(21,3.4,'TIEMPO DE MANTENIMIENTO (HRS)', 'LRTB', 'C', true);
+
+                $this->SetXY(245,47);
+                $this ->MultiCell(20,3.4,'TIEMPO INOPERATIVO (HRS)', 'LRTB', 'C', true);
 
                 // BAJO LINEA DE EMBARCACION
 
@@ -141,7 +154,7 @@
 
              function tablaHistorial($data){
                  // Column widths
-                 $w = array(10, 16, 16, 22, 16, 23, 23, 20, 68, 21, 20);
+                 $w = array(10, 16, 16, 22, 16, 23, 23, 20, 55, 13 ,21, 20);
                  // Header
                  $nitem = 1;
                  $this->SetFont('Arial','',6);
@@ -158,8 +171,9 @@
                      $this->Cell($w[6],6,utf8_decode($row['com_falla']),'LRB',0,'C');
                      $this->Cell($w[7],6,$row['afectaservicio']  == 1 ? 'Si' : 'No','LRB',0,'C');
                      $this->Cell($w[8],6,utf8_decode($row['com_general']),'LRB',0,'C');
-                     $this->Cell($w[9],6,$row['tiempo_mtto'],'LRB',0,'C');
-                     $this->Cell($w[10],6,$row['tiempo_ino'],'LRB',0,'C');
+                     $this->Cell($w[9],6,$row['costo'],'LRB',0,'C');
+                     $this->Cell($w[10],6,$row['tiempo_mtto'],'LRB',0,'C');
+                     $this->Cell($w[11],6,$row['tiempo_ino'],'LRB',0,'C');
 
                      $this->Ln();
                      $nitem++;

@@ -35,7 +35,7 @@
             <div class="card text-white bg-dark py-5 d-md-down-none" style="width:44%">
               <div class="card-body text-center">
                 <div>
-                  <h2>BoatControl</h2>
+                  <h2>NavegaContigo</h2>
                   <p>Sistema elaborado para el mantenimiento y gestion de embarcaciones</p>
                   <p>GRUPO DE TRANSPORTE ATM, C.A</p><p>ISO 9001:2015 Nº580065</p>
                 </div>

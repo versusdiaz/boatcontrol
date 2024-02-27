@@ -18,13 +18,13 @@ switch ($_GET["op"]) {
             // //$dataCentro = $report->mostrarCentro($idcentro);
 
              $codigo = 'ATM-RG-MT-007';
-             $fecha = '31/03/2023';
-             $revision = '01';
+             $fecha = '22/02/2024';
+             $revision = '02';
              $titulo = 'HISTORIAL DE MANTENIMIENTO A EMBARCACIONES';
              $nombreCentro = $report->mostrarCentro($idcentro);
              $dataCentro = $report->dataCentro($idcentro);
 
-            $pdf = new PDF($codigo,$fecha,$revision,$titulo,$nombreCentro['nombre']);
+            $pdf = new PDF($codigo,$fecha,$revision,$titulo,$nombreCentro['nombre'],$nombreCentro['tag']);
             $pdf->AddPage('L', 'Letter', 0);
             $pdf->SetFillColor(198, 198, 247);
 
@@ -39,7 +39,7 @@ switch ($_GET["op"]) {
             $pdf->SetXY($x,$y+10);
             $pdf->SetFont('Arial','B',12);
             $pdf->SetXY($x,$y+15);
-            $pdf->Cell(255,5,'RESUMEN INDICADORES 2023', 'LTRB', 0, 'C',true);
+            $pdf->Cell(255,5,'RESUMEN INDICADORES 2024', 'LTRB', 0, 'C',true);
             $pdf->ln();
             $pdf->SetFont('Arial','',8);
             $pdf->Cell(255,5,'DISPONIBILIDAD POR MES % = (TIEMPO TOTAL - TIEMPO INOPERATIVO) / TIEMPO TOTAL ', 'LTRB', 0, 'C');
@@ -81,15 +81,15 @@ switch ($_GET["op"]) {
             require_once("fpdf/config2.php");
 
             $codigo = 'ATM-RG-MT-009';
-            $fecha = '01/01/2024';
+            $fecha = '22/02/2024';
             $revision = '00';
-            $titulo = 'SEGUIMIENDO Y CONTROL DEL PROGRAMA DE MANTENIMIENTO PREVENTIVO PARA EMBARCACIONES';
+            $titulo = 'SEGUIMIENTO Y CONTROL DEL PROGRAMA DE MANTENIMIENTO PREVENTIVO PARA EMBARCACIONES';
             // Pido los datos de la embarcacion
             $nombreCentro = $report->mostrarCentro($idcentro2);
             
             $dataAct = $report->mostrarAct($idcentro2);
 
-            $pdf = new PDF($codigo,$fecha,$revision,$titulo,$nombreCentro['nombre']);
+            $pdf = new PDF($codigo,$fecha,$revision,$titulo,$nombreCentro['nombre'],$nombreCentro['tag']);
             $pdf->AddPage('L', 'Letter', 0);
             $pdf->SetFillColor(198, 198, 247);
 
@@ -105,7 +105,6 @@ switch ($_GET["op"]) {
 
         } else {
         echo "No se puede generar el reporte";
-        //SELECT T2.idact, T2.numact, T3.codigo, T3.fecha, T3.horas, T1.horasprox, T2.nombre FROM act_ods AS T1 LEFT JOIN act AS T2 ON T1.idact = T2.idact LEFT JOIN ods_mtto AS T3 ON T3.idods_mtto = T1.idods_mtto WHERE T3.idcentro = 5 AND T2.esplan = 2;
         }
     break;
 
