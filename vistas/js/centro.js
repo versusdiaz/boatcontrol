@@ -183,4 +183,42 @@ swal({
         });
  }
 
+ function horas(idcentro){
+    swal({
+        title: "Introduzca las horas de la Embarcacion",
+        text: "Horas actuales:",
+        type: "input",
+        showCancelButton: true,
+        closeOnConfirm: false,
+        animation: "slide-from-top",
+        inputPlaceholder: "(HRS) Evite , y/o ."
+      },
+      function(inputValue){
+        if (inputValue === null) return false;
+        
+        if (inputValue === "") {
+          swal.showInputError("Necesita escribir las horas!");
+          return false
+        }
+
+        // swal("Nice!", "You wrote: " + inputValue, "success");
+
+        swal({
+            title: "Esta seguro..?"
+            , text: "Se actualizara a " + inputValue + " (HRS) en el sistema"
+            , type: "warning"
+            , showCancelButton: true
+            , confirmButtonColor: "#da4f49"
+            , confirmButtonText: "Si, deseo actualizarlas!"
+            , closeOnConfirm: false
+            }, function () {
+                $.post('controllers/centro.php?op=horas',{horas:inputValue,idcentro:idcentro},function(e){
+                swal("Actualizada!", e , "success");  
+                tabla.ajax.reload();
+                });
+            });
+
+      });
+ }
+
 init();

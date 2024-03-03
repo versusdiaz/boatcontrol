@@ -27,7 +27,7 @@
                       </div>
                       <div class="card-body">
                         <div class="jumbotron">
-                          <h1 class="display-3">BoatControl</h1>
+                          <h1 class="display-3">NavegaContigo</h1>
                           <p class="lead">Sistema para control de embarcaciones de ATM</p>
                           <hr class="my-4">
                           <p> <b>Objetivo de la Sistema</b></p>

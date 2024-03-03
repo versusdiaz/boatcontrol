@@ -9,6 +9,7 @@ class EnlacesModels{
            $enlaces == "ods_list" ||
            $enlaces == "ods_mtto" ||
            $enlaces == "programas" ||
+           $enlaces == "veralert" ||
            $enlaces == "actividades" ||
            $enlaces == "escritorio" ){
             /* MODULO A CARGAR SERA */

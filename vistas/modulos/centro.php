@@ -32,6 +32,7 @@
                                     <thead>
                                         <th>Opciones</th>
                                         <th>Nombre</th>
+                                        <th>Horas Actuales</th>
                                         <th>Status</th>
                                         </tfoot>
                                     </thead>
@@ -40,6 +41,7 @@
                                     <tfoot>
                                         <th>Opciones</th>
                                         <th>Nombre</th>
+                                        <th>Horas Actuales</th>
                                         <th>Status</th>
                                     </tfoot>
                                 </table>

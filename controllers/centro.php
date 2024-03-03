@@ -10,6 +10,8 @@ $idcentro = isset($_POST['idcentro']) ? limpiarCadena($_POST['idcentro']): "";
 
 $nombre=isset($_POST["nombre"])? limpiarCadena($_POST["nombre"]):"";
 
+$horas=isset($_POST["horas"])? limpiarCadena($_POST["horas"]):"";
+
 switch ($_GET["op"]){
     case 'guardaryeditar':
 		if (empty($idcentro)){
@@ -27,11 +29,12 @@ switch ($_GET["op"]){
         $data = Array();
         while($reg = $rspta->fetch_object()){
            $data[]=array(
-               "0"=>($reg->condicion)?'<button class="btn btn-warning" onclick="mostrar('.$reg->idcentro.')"><i class="nav-icon icon-pencil" style="color:white" ></i></button> <button class="btn btn-danger" onclick="eliminar('.$reg->idcentro.')"><i class="fa fa-trash"></i></button>'.
- 					' <button class="btn btn-secondary" onclick="desactivar('.$reg->idcentro.')"><i class="fa fa-times"></i></button>':'<button class="btn btn-warning" onclick="mostrar('.$reg->idcentro.')"><i class="nav-icon icon-pencil"  style="color:white" ></i></button> <button class="btn btn-danger" onclick="eliminar('.$reg->idcentro.')"><i class="fa fa-trash"></i></button>'.
+               "0"=>($reg->condicion)?'<button class="btn btn-warning" onclick="mostrar('.$reg->idcentro.')"><i class="nav-icon icon-pencil" style="color:white" ></i></button> <button class="btn btn-primary" onclick="horas('.$reg->idcentro.')"><i class="nav-icon icon-clock" style="color:white" ></i></button> <button class="btn btn-danger" onclick="eliminar('.$reg->idcentro.')"><i class="fa fa-trash"></i></button>'.
+ 					' <button class="btn btn-secondary" onclick="desactivar('.$reg->idcentro.')"><i class="fa fa-times"></i></button>':'<button class="btn btn-warning" onclick="mostrar('.$reg->idcentro.')"><i class="nav-icon icon-pencil"  style="color:white" ></i></button> <button class="btn btn-primary" onclick="horas('.$reg->idcentro.')"><i class="nav-icon icon-clock" style="color:white" ></i></button> <button class="btn btn-danger" onclick="eliminar('.$reg->idcentro.')"><i class="fa fa-trash"></i></button>'.
  					' <button class="btn btn-primary" onclick="activar('.$reg->idcentro.')"><i class="fa fa-check"></i></button>',
                "1"=>$reg->nombre,
-               "2"=>($reg->condicion)?'<span class="badge badge-success">Activado</span>':'<span class="badge badge-danger">Desactivado</span>'
+               "2"=>$reg->horasactual,
+               "3"=>($reg->condicion)?'<span class="badge badge-success">Activado</span>':'<span class="badge badge-danger">Desactivado</span>'
            );
         }
         /*CARGAMOS LA DATA EN LA VARIABLE USADA PARA EL DATATABLE*/
@@ -71,6 +74,16 @@ switch ($_GET["op"]){
     $rspta = $centro->eliminar($idcentro);
     echo $rspta ? "Embarcacion eliminada": "La embarcacion no se puede eliminar, verifique que no este vinculada a otro ";
     break;
-        
+    
+    case 'horas':
+        $rspta = $centro->horasActuales($idcentro);
+        if ($horas >= $rspta['horasactual']){
+            $rspta2 = $centro->horas($idcentro,$horas);
+            echo $rspta2 ? "Horas actualizadas": "Las horas no se pudieron actualizar";
+        } else {
+            // Nota se tiene que modificar las HRS desde la base de datos en caso de que se cambien los motores
+            echo 'No se pudieron actualizar las horas por ser menores a las registradas';
+        }
+    break;
 
 }

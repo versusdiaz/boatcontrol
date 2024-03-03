@@ -46,4 +46,17 @@ class Centro{
         $sql = "DELETE FROM centro WHERE idcentro='$idcentro'";
         return Consulta($sql);
     }
+
+    public static function horas($idcentro,$horas){
+        $sql = "UPDATE centro SET horasactual = '$horas' WHERE idcentro = '$idcentro'";
+        $sw = true;
+        Consulta($sql) or $sw = false;
+        return $sw;
+    }
+
+    public static function horasActuales($idcentro){
+        $sql = "SELECT horasactual FROM centro WHERE idcentro='$idcentro'";
+        return ConsultaFila($sql);
+    }
+
 }
