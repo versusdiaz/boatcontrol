@@ -78,13 +78,15 @@ switch ($_GET["op"]){
 
                     
                     if ($diferenciaHoras < 24) {
-                        $mensaje = "<p>**¡Alerta!** La actividad <strong>" . $item2['nombre'] . "</strong> está planeada para las " . $item2['horasplan']  . " y solo quedan <strong>" . $diferenciaHoras . " horas</strong> para que ser ejecutada.</p>";
+                        $mensaje = "<p class= 'alert alert-danger alert-dismissible' >**¡Alerta!** La actividad <strong>" . $item2['nombre'] . "</strong> está planeada para las " . $item2['horasplan']  . " y solo quedan <strong>" . $diferenciaHoras . " horas</strong> para que ser ejecutada.</p>";
                         // Agregar el mensaje al array de la embarcación
                     } elseif ($diferenciaHoras < 50) {
-                        $mensaje = "<p>**Aviso:**  tiene la actividad <strong>" . $item2['nombre']  . "</strong> planeada para las " . $item2['horasplan'] . " y quedan <strong>" . $diferenciaHoras . " horas</strong> para que se ejecute.</p>";
+                        $mensaje = "<p class='alert alert-warning alert-dismissible'>**Aviso:**  tiene la actividad <strong>" . $item2['nombre']  . "</strong> planeada para las " . $item2['horasplan'] . " y quedan <strong>" . $diferenciaHoras . " horas</strong> para que se ejecute.</p>";
 
-                    } else {
-                        $mensaje = "<p> <strong>" . $item2['nombre'] . "</strong> planeada para las " . $item2['horasplan'] . " y aún quedan <strong>" . $diferenciaHoras . " horas</strong> para que se ejecute.</p>";  
+                    } 
+                    else {
+                        $mensaje = "";
+                        // $mensaje = "<p> <strong>" . $item2['nombre'] . "</strong> planeada para las " . $item2['horasplan'] . " y aún quedan <strong>" . $diferenciaHoras . " horas</strong> para que se ejecute.</p>";  
                     }
 
                     $mensajesAgrupados[$embarcacion][] = $mensaje;  
@@ -92,19 +94,35 @@ switch ($_GET["op"]){
                     } else {
                     // La actividad está vencida
                     $diferenciaHoras = $item['horasactual'] - $item2['horasplan'];
-                    $mensaje = "La actividad estaba planeada para las " . $item2['horasplan'] . " y está vencida desde hace " . $diferenciaHoras . " horas.";
+                    $mensaje = "<p class= 'alert alert-danger alert-dismissible' > La actividad estaba planeada para las " . $item2['horasplan'] . " y está vencida desde hace " . $diferenciaHoras . " horas.</p>";
                   }
             }
 
         }
 
                     // Recorro el arreglo
+                    $mostrarEncabezado = false;
+
                     foreach ($mensajesAgrupados as $embarcacion => $mensajes) {
+                    if ($mostrarEncabezado === false) {
+                        echo '<div id="lwarning2">';
+                        echo '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
+                        // echo '<h4> <i class="fa fa-warning"></i> Advertencia!</h4>Las siguientes actividades estan proximas a ejecutarse:';
+
                         echo "<h2>Embarcación: $embarcacion</h2>";
-                        foreach ($mensajes as $mensaje) {
-                            echo $mensaje;
+                        $mostrarEncabezado = true;
+                    }
+
+                    foreach ($mensajes as $mensaje) {
+                        if ($mensaje !== "") {
+                        echo $mensaje;
                         }
-                }
+                    }
+
+                    $mostrarEncabezado = false; // Restablecer la variable
+
+                    echo '</div>';
+                    }
 
     break;
 

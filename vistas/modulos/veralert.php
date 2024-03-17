@@ -32,30 +32,9 @@
                         <div class="box box-danger">
                             <div class="box-header with-border">
                                 
-                                <h3 class="box-title">Resumen de Actividades</h3>
+                                <h3 class="box-title">Resumen de Alertas</h3>
                             </div>
-                            <div class="box-body">
-                                <div id="ldanger2" class="alert alert-danger alert-dismissible">
-                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                    <h4>
-                                        <i class="icon fa fa-ban"></i> Vencido!</h4>Las siguientes actividades estan vencidas:
-                                    <ol id='certificadoVencida'>
-
-                                    </ol>
-                                </div>
-                                <div id="lwarning2" class="alert alert-warning alert-dismissible">
-                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                    <h4>
-                                        <i class="fa fa-warning"></i> Advertencia!</h4>Las siguientes actividades estan proximas a ejecutarse:
-
-                                    <ol id='licenciaPorVencer'>
-                                    </ol>
-                                </div>
-                                <div id="lsuccess2" class="alert alert-success alert-dismissible">
-                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                    <h4>
-                                        <i class="icon fa fa-check"></i> Exito!</h4> Todas las actividades estan al dia! </div>
-                            </div>
+                            <div class="box-body" id='licenciaPorVencer'>
                         </div>
                     </div>
                     </div>

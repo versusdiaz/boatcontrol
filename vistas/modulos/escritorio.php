@@ -12,9 +12,6 @@
         <!-- Breadcrumb-->
         <ol class="breadcrumb">
           <li class="breadcrumb-item">Home</li>
-          <li class="breadcrumb-item">
-            <a href="#">Admin</a>
-          </li>
           <li class="breadcrumb-item active">Escritorio</li>
         </ol>
         <div class="container-fluid">
